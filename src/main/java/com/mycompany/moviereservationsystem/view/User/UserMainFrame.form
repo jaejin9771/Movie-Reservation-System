@@ -100,6 +100,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#x2190;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="previousFrameButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -129,6 +132,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="&#xc601;&#xd654;&#xc0c1;&#xc601;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="movieFrameButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
@@ -140,6 +146,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="&#xc2a4;&#xc704;&#xd2b8;&#xc0f5;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="paymentFrameButton">
       <Properties>
@@ -151,6 +160,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="&#xacb0;&#xc81c; &#xb0b4;&#xc5ed;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="paymentFrameButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
       <Properties>
@@ -162,6 +174,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="&#xc815;&#xbcf4; &#xc218;&#xc815;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

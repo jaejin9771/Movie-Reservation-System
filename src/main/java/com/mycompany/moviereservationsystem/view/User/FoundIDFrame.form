@@ -104,6 +104,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#x2190;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="previousFrameButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
@@ -155,6 +158,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="&#xcc3e;&#xae30;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchIDButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

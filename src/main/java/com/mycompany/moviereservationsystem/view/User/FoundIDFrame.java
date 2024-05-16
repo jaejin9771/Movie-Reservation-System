@@ -15,6 +15,7 @@ public class FoundIDFrame extends javax.swing.JFrame {
      */
     public FoundIDFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -41,6 +42,11 @@ public class FoundIDFrame extends javax.swing.JFrame {
 
         previousFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         previousFrameButton.setText("←");
+        previousFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousFrameButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel1.setText("ID 찾기");
@@ -77,6 +83,11 @@ public class FoundIDFrame extends javax.swing.JFrame {
         searchIDButton.setBackground(new java.awt.Color(204, 204, 204));
         searchIDButton.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         searchIDButton.setText("찾기");
+        searchIDButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchIDButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,40 +129,20 @@ public class FoundIDFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FoundIDFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FoundIDFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FoundIDFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FoundIDFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
+        // TODO add your handling code here:
+        LoginFrame login = new LoginFrame();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_previousFrameButtonActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FoundIDFrame().setVisible(true);
-            }
-        });
-    }
+    private void searchIDButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchIDButtonActionPerformed
+        // TODO add your handling code here:
+        //입력한 정보가 맞다면 아이디와 비밀번호를 수정할 수 있도록 한다.
+        ModifyUserInfoFrame user = new ModifyUserInfoFrame();
+        user.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_searchIDButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField inputName;

@@ -15,6 +15,7 @@ public class ModifyUserInfoFrame extends javax.swing.JFrame {
      */
     public ModifyUserInfoFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -43,6 +44,11 @@ public class ModifyUserInfoFrame extends javax.swing.JFrame {
 
         previousFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         previousFrameButton.setText("←");
+        previousFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousFrameButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel1.setText("회원 정보 수정");
@@ -84,6 +90,11 @@ public class ModifyUserInfoFrame extends javax.swing.JFrame {
         modifyInfoButton.setBackground(new java.awt.Color(204, 204, 204));
         modifyInfoButton.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         modifyInfoButton.setText("수정");
+        modifyInfoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modifyInfoButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,40 +152,20 @@ public class ModifyUserInfoFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModifyUserInfoFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModifyUserInfoFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModifyUserInfoFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModifyUserInfoFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void modifyInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyInfoButtonActionPerformed
+        // TODO add your handling code here:
+        //데이터파일에 수정된 정보가 저장되었다면 (Login singleton객체와 이 화면에서 입력된 ID 값이 같았을 때 수정)
+        UserMainFrame user = new UserMainFrame();
+        user.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_modifyInfoButtonActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ModifyUserInfoFrame().setVisible(true);
-            }
-        });
-    }
+    private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
+        // TODO add your handling code here:
+         UserMainFrame user = new UserMainFrame();
+        user.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_previousFrameButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField inputID;

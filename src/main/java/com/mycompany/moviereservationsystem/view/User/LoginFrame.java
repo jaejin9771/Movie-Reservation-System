@@ -4,6 +4,9 @@
  */
 package com.mycompany.moviereservationsystem.view.User;
 
+import com.mycompany.moviereservationsystem.view.MainFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author LG
@@ -15,6 +18,7 @@ public class LoginFrame extends javax.swing.JFrame {
      */
     public LoginFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -34,6 +38,8 @@ public class LoginFrame extends javax.swing.JFrame {
         inputID = new javax.swing.JTextField();
         inputPW = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
+        foundIDFrameButton = new javax.swing.JButton();
+        foundPWFrameButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,6 +47,11 @@ public class LoginFrame extends javax.swing.JFrame {
 
         previousFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         previousFrameButton.setText("←");
+        previousFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousFrameButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel1.setText("Login");
@@ -77,6 +88,27 @@ public class LoginFrame extends javax.swing.JFrame {
         loginButton.setBackground(new java.awt.Color(204, 204, 204));
         loginButton.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         loginButton.setText("로그인");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
+
+        foundIDFrameButton.setBackground(new java.awt.Color(204, 204, 204));
+        foundIDFrameButton.setText("ID찾기");
+        foundIDFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                foundIDFrameButtonActionPerformed(evt);
+            }
+        });
+
+        foundPWFrameButton.setBackground(new java.awt.Color(204, 204, 204));
+        foundPWFrameButton.setText("PW 찾기");
+        foundPWFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                foundPWFrameButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,7 +126,11 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(inputPW, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                 .addContainerGap(83, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(foundIDFrameButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(foundPWFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -111,49 +147,51 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(inputPW, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(foundIDFrameButton)
+                        .addComponent(foundPWFrameButton)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
+        // TODO add your handling code here:
+        MainFrame main = new MainFrame();
+        main.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_previousFrameButtonActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginFrame().setVisible(true);
-            }
-        });
-    }
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        //만약 입력된 회원정보가 맞다면
+        UserMainFrame user = new UserMainFrame();
+        user.setVisible(true);
+        dispose();
+        //아니라면
+        //JOptionPane.showMessageDialog(null, "로그인 정보가 맞지 않습니다.");
+    }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void foundIDFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foundIDFrameButtonActionPerformed
+        // TODO add your handling code here:
+        FoundIDFrame id = new FoundIDFrame();
+        id.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_foundIDFrameButtonActionPerformed
+
+    private void foundPWFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foundPWFrameButtonActionPerformed
+        // TODO add your handling code here:
+        FoundPWFrame pw = new FoundPWFrame();
+        pw.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_foundPWFrameButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton foundIDFrameButton;
+    private javax.swing.JButton foundPWFrameButton;
     private javax.swing.JTextField inputID;
     private javax.swing.JTextField inputPW;
     private javax.swing.JLabel jLabel1;

@@ -4,6 +4,8 @@
  */
 package com.mycompany.moviereservationsystem.view.Movie;
 
+import com.mycompany.moviereservationsystem.view.User.UserMainFrame;
+
 /**
  *
  * @author LG
@@ -15,6 +17,7 @@ public class MovieScreeningFrame extends javax.swing.JFrame {
      */
     public MovieScreeningFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -39,6 +42,11 @@ public class MovieScreeningFrame extends javax.swing.JFrame {
 
         previousFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         previousFrameButton.setText("←");
+        previousFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousFrameButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel1.setText("영화 상영 정보");
@@ -78,6 +86,11 @@ public class MovieScreeningFrame extends javax.swing.JFrame {
         ReservationFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         ReservationFrameButton.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         ReservationFrameButton.setText("영화 예매");
+        ReservationFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReservationFrameButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,40 +120,21 @@ public class MovieScreeningFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MovieScreeningFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MovieScreeningFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MovieScreeningFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MovieScreeningFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
+        // TODO add your handling code here:
+        UserMainFrame user = new UserMainFrame();
+        user.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_previousFrameButtonActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MovieScreeningFrame().setVisible(true);
-            }
-        });
-    }
+    private void ReservationFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReservationFrameButtonActionPerformed
+        // TODO add your handling code here:
+        //JTable 클릭한 행의 영화 정보 가지고 와야 함
+        MovieDateFrame date = new MovieDateFrame();
+        date.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_ReservationFrameButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ReservationFrameButton;
