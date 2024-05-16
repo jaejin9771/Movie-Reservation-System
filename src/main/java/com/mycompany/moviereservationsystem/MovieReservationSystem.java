@@ -4,6 +4,7 @@
 
 package com.mycompany.moviereservationsystem;
 
+import com.mycompany.moviereservationsystem.view.MainFrame;
 import com.mycompany.moviereservationsystem.view.User.LoginFrame;
 
 /**
@@ -13,7 +14,7 @@ import com.mycompany.moviereservationsystem.view.User.LoginFrame;
 public class MovieReservationSystem {
 
     public static void main(String[] args) {
-        LoginFrame login = new LoginFrame();
-        login.setVisible(true);
+        MainFrame main = new MainFrame();
+        main.setVisible(true);
     }
 }

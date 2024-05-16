@@ -4,6 +4,11 @@
  */
 package com.mycompany.moviereservationsystem.view.User;
 
+import com.mycompany.moviereservationsystem.view.MainFrame;
+import com.mycompany.moviereservationsystem.view.Movie.MovieScreeningFrame;
+import com.mycompany.moviereservationsystem.view.Payment.PaymentFrame;
+import com.mycompany.moviereservationsystem.view.SweetShop.SweetShopFrame;
+
 /**
  *
  * @author LG
@@ -15,6 +20,7 @@ public class UserMainFrame extends javax.swing.JFrame {
      */
     public UserMainFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -41,6 +47,11 @@ public class UserMainFrame extends javax.swing.JFrame {
 
         previousFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         previousFrameButton.setText("←");
+        previousFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousFrameButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel1.setText("id");
@@ -73,18 +84,38 @@ public class UserMainFrame extends javax.swing.JFrame {
         movieFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         movieFrameButton.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         movieFrameButton.setText("영화상영");
+        movieFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                movieFrameButtonActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         jButton1.setText("스위트샵");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         paymentFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         paymentFrameButton.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         paymentFrameButton.setText("결제 내역");
+        paymentFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paymentFrameButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(204, 204, 204));
         jButton2.setFont(new java.awt.Font("맑은 고딕", 1, 18)); // NOI18N
         jButton2.setText("정보 수정");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,40 +151,39 @@ public class UserMainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UserMainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UserMainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UserMainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UserMainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
+        MainFrame main = new MainFrame();
+        main.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_previousFrameButtonActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UserMainFrame().setVisible(true);
-            }
-        });
-    }
+    private void movieFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movieFrameButtonActionPerformed
+        // TODO add your handling code here:
+        MovieScreeningFrame movie = new MovieScreeningFrame();
+        movie.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_movieFrameButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        SweetShopFrame shop = new SweetShopFrame();
+        shop.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void paymentFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentFrameButtonActionPerformed
+        // TODO add your handling code here:
+        PaymentFrame pay = new PaymentFrame();
+        pay.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_paymentFrameButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        ModifyUserInfoFrame user = new ModifyUserInfoFrame();
+        user.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
