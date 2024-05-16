@@ -4,8 +4,13 @@
  */
 package deu.cse.moviereservationsystem.view.SweetShop;
 
+import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Items;
+import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Popcorn.PopcornDecorator.*;
+import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
+import deu.cse.moviereservationsystem.Pattern.SweetShopStrategy.SizeStratrgy.SizeOptions;
 import deu.cse.moviereservationsystem.view.InputImage;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,14 +22,26 @@ public class AddSeasoningFrame extends javax.swing.JFrame {
      * Creates new form AddSeasoningFrame
      */
     InputImage input = new InputImage();
-    public AddSeasoningFrame() {
+    Items item;
+    boolean clickSize = false; //사이즈 클릭 감지
+    boolean clickOption = false; //옵션 클릭 감지
+
+    private String menu;
+    private String size;
+    private int cost;
+
+    SizeOptions s = new SizeOptions("S");
+    SizeOptions m = new SizeOptions("M");
+    SizeOptions l = new SizeOptions("L");
+
+    public AddSeasoningFrame(Items item) {
+        this.item = item;
         initComponents();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); //창 숨김
         inputImage();
     }
 
-    
     private void inputImage() {
         input.imageLabel("/image/Cheese.png", jLabel2);
         input.imageLabel("/image/chili.png", jLabel4);
@@ -46,12 +63,13 @@ public class AddSeasoningFrame extends javax.swing.JFrame {
         CheeseSeasoningButton = new javax.swing.JButton();
         ChiliSeasoningButton = new javax.swing.JButton();
         GarlicSeasoningButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        SizeS_Button = new javax.swing.JButton();
+        SizeM_Button = new javax.swing.JButton();
+        SizeL_Button = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        addOrderButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,22 +107,60 @@ public class AddSeasoningFrame extends javax.swing.JFrame {
 
         CheeseSeasoningButton.setBackground(new java.awt.Color(224, 224, 224));
         CheeseSeasoningButton.setText("담기");
+        CheeseSeasoningButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CheeseSeasoningButtonActionPerformed(evt);
+            }
+        });
 
         ChiliSeasoningButton.setBackground(new java.awt.Color(224, 224, 224));
         ChiliSeasoningButton.setText("담기");
+        ChiliSeasoningButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChiliSeasoningButtonActionPerformed(evt);
+            }
+        });
 
         GarlicSeasoningButton.setBackground(new java.awt.Color(224, 224, 224));
         GarlicSeasoningButton.setText("담기");
+        GarlicSeasoningButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GarlicSeasoningButtonActionPerformed(evt);
+            }
+        });
 
-        jButton1.setBackground(new java.awt.Color(224, 224, 224));
-        jButton1.setText("S");
-        jButton1.setToolTipText("");
+        SizeS_Button.setBackground(new java.awt.Color(224, 224, 224));
+        SizeS_Button.setText("S");
+        SizeS_Button.setToolTipText("");
+        SizeS_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SizeS_ButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(224, 224, 224));
-        jButton2.setText("M");
+        SizeM_Button.setBackground(new java.awt.Color(224, 224, 224));
+        SizeM_Button.setText("M");
+        SizeM_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SizeM_ButtonActionPerformed(evt);
+            }
+        });
 
-        jButton3.setBackground(new java.awt.Color(224, 224, 224));
-        jButton3.setText("L");
+        SizeL_Button.setBackground(new java.awt.Color(224, 224, 224));
+        SizeL_Button.setText("L");
+        SizeL_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SizeL_ButtonActionPerformed(evt);
+            }
+        });
+
+        addOrderButton.setBackground(new java.awt.Color(204, 204, 204));
+        addOrderButton.setText("담기");
+        addOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addOrderButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,40 +168,42 @@ public class AddSeasoningFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SizeS_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SizeM_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(SizeL_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(CheeseSeasoningButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(ChiliSeasoningButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
-                        .addComponent(GarlicSeasoningButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(GarlicSeasoningButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117)
+                .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -154,9 +212,11 @@ public class AddSeasoningFrame extends javax.swing.JFrame {
                     .addComponent(CheeseSeasoningButton))
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SizeS_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SizeM_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SizeL_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(addOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -165,19 +225,84 @@ public class AddSeasoningFrame extends javax.swing.JFrame {
 
     private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
         // TODO add your handling code here:
-        PopcornFrame popcorn = new PopcornFrame();
+        PopcornFrame popcorn = PopcornFrame.getInstance();
         popcorn.setVisible(true);
         dispose();
     }//GEN-LAST:event_previousFrameButtonActionPerformed
+
+    private void CheeseSeasoningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheeseSeasoningButtonActionPerformed
+        // TODO add your handling code here:
+        this.item = new CheeseSeasoning(item);
+        clickOption = true;
+    }//GEN-LAST:event_CheeseSeasoningButtonActionPerformed
+
+    private void ChiliSeasoningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChiliSeasoningButtonActionPerformed
+        // TODO add your handling code here:
+        this.item = new ChiliSeasoning(item);
+        clickOption = true;
+    }//GEN-LAST:event_ChiliSeasoningButtonActionPerformed
+
+    private void GarlicSeasoningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GarlicSeasoningButtonActionPerformed
+        // TODO add your handling code here:
+        this.item = new GarlicSeasoning(item);
+        clickOption = true;
+    }//GEN-LAST:event_GarlicSeasoningButtonActionPerformed
+
+    private void SizeS_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeS_ButtonActionPerformed
+        // TODO add your handling code here:
+        if (!clickSize) {
+            size = s.getSize();
+            cost += s.getCost();
+            clickSize = true;
+        } else
+            JOptionPane.showMessageDialog(null, "이미 선택하신 사이즈는 " + size + "입니다.", "정보", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_SizeS_ButtonActionPerformed
+
+    private void SizeM_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeM_ButtonActionPerformed
+        // TODO add your handling code here:
+        if (!clickSize) {
+            size = m.getSize();
+            cost += m.getCost();
+            clickSize = true;
+        } else
+            JOptionPane.showMessageDialog(null, "이미 선택하신 사이즈는 " + size + "입니다.", "정보", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_SizeM_ButtonActionPerformed
+
+    private void SizeL_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeL_ButtonActionPerformed
+        // TODO add your handling code here:
+        if (!clickSize) {
+            size = l.getSize();
+            cost += l.getCost();
+            clickSize = true;
+        } else
+            JOptionPane.showMessageDialog(null, "이미 선택하신 사이즈는 " + size + "입니다.", "정보", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_SizeL_ButtonActionPerformed
+
+    private void addOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrderButtonActionPerformed
+        // TODO add your handling code here:
+        if (clickSize) {
+            menu = item.getDescription();
+            cost = item.cost();
+            OrderList order = OrderList.getInstance();
+            order.receiveOrderList(menu, size, cost);
+            PopcornFrame popcorn = PopcornFrame.getInstance();
+            popcorn.setVisible(true);
+            dispose();
+        } else {
+            System.out.println("사이즈를 선택해주세요");
+        }
+
+    }//GEN-LAST:event_addOrderButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CheeseSeasoningButton;
     private javax.swing.JButton ChiliSeasoningButton;
     private javax.swing.JButton GarlicSeasoningButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton SizeL_Button;
+    private javax.swing.JButton SizeM_Button;
+    private javax.swing.JButton SizeS_Button;
+    private javax.swing.JButton addOrderButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

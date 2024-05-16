@@ -4,26 +4,59 @@
  */
 package deu.cse.moviereservationsystem.view.SweetShop;
 
+import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Beverage.*;
+import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Items;
+import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Displayment;
+import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Observer;
+import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
 import deu.cse.moviereservationsystem.view.InputImage;
-import javax.swing.JFrame;
 
 /**
  *
  * @author LG
  */
-public class BeverageFrame extends javax.swing.JFrame {
+public class BeverageFrame extends javax.swing.JFrame implements Observer, Displayment{
 
     /**
      * Creates new form BeverageFrame
      */
     InputImage input = new InputImage();
+    Items item;
 
-    public BeverageFrame() {
+    private static BeverageFrame instance; // 인스턴스 변수 선언
+    private OrderList order;
+    int countOrder;
+    
+    private BeverageFrame() {
         initComponents();
         setLocationRelativeTo(null);
         inputImage();
     }
+    
+    public static BeverageFrame getInstance() { //싱글턴 패턴 사용
+        if (instance == null) { // 인스턴스가 없는 경우에만 생성
+            instance = new BeverageFrame(); // 매개변수 없는 생성자 호출
+        }
+        return instance;
+    }
+    
+    public void setOrder(OrderList order) { // 매개변수가 order인 생성자 호출
+        this.order = order;
+        order.addObserver(this);
+    }
 
+    @Override
+    public void updateObserver(String menu, String size, int cost, int countOrder) {
+        this.countOrder = countOrder;
+        display();
+    }
+
+    @Override
+    public void display() {
+        setCountOrder.setText(Integer.toString(countOrder));
+    }
+
+    
     private void inputImage() {
         input.imageLabel("/image/Coke.png", jLabel4);
         input.imageLabel("/image/Cider.png", jLabel2);
@@ -31,7 +64,12 @@ public class BeverageFrame extends javax.swing.JFrame {
         input.imageLabel("/image/MangoJuice.png", jLabel3);
         input.imageButt("/image/ShoppingCart.png", ShoppingCartButton);
     }
-
+    
+     private void clickButton() {
+        AddOptionFrame frame = new AddOptionFrame(item);
+        frame.setVisible(true);
+        dispose();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,7 +88,7 @@ public class BeverageFrame extends javax.swing.JFrame {
         orangeJuiceButton = new javax.swing.JButton();
         mangoJuiceButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        countOrder = new javax.swing.JLabel();
+        setCountOrder = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -113,18 +151,33 @@ public class BeverageFrame extends javax.swing.JFrame {
 
         ciderButton.setBackground(new java.awt.Color(224, 224, 224));
         ciderButton.setText("담기");
+        ciderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ciderButtonActionPerformed(evt);
+            }
+        });
 
         orangeJuiceButton.setBackground(new java.awt.Color(224, 224, 224));
         orangeJuiceButton.setText("담기");
+        orangeJuiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orangeJuiceButtonActionPerformed(evt);
+            }
+        });
 
         mangoJuiceButton.setBackground(new java.awt.Color(224, 224, 224));
         mangoJuiceButton.setText("담기");
+        mangoJuiceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mangoJuiceButtonActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jLabel6.setText("주문갯수 : ");
 
-        countOrder.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        countOrder.setText("0");
+        setCountOrder.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        setCountOrder.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -135,7 +188,7 @@ public class BeverageFrame extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(countOrder)
+                .addComponent(setCountOrder)
                 .addGap(20, 20, 20))
             .addGroup(layout.createSequentialGroup()
                 .addGap(88, 88, 88)
@@ -166,7 +219,7 @@ public class BeverageFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(countOrder))
+                    .addComponent(setCountOrder))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,31 +246,46 @@ public class BeverageFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cokeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cokeButtonActionPerformed
-        // TODO add your handling code here:
-        AddOptionButton option = new AddOptionButton();
-        option.setVisible(true);
-        dispose();
+        item = new Coke();
+        clickButton();
     }//GEN-LAST:event_cokeButtonActionPerformed
 
     private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
         // TODO add your handling code here:
-        SweetShopFrame cart = new SweetShopFrame();
+        SweetShopFrame cart = SweetShopFrame.getInstance();
         cart.setVisible(true);
         dispose();
     }//GEN-LAST:event_previousFrameButtonActionPerformed
 
     private void ShoppingCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShoppingCartButtonActionPerformed
         // TODO add your handling code here:
-         ShoppingCartFrame cart = new ShoppingCartFrame();
+         ShoppingCartFrame cart = ShoppingCartFrame.getInstance();
         cart.setVisible(true);
         dispose();
     }//GEN-LAST:event_ShoppingCartButtonActionPerformed
+
+    private void ciderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciderButtonActionPerformed
+        // TODO add your handling code here:
+        item = new Cider();
+        clickButton();
+    }//GEN-LAST:event_ciderButtonActionPerformed
+
+    private void mangoJuiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mangoJuiceButtonActionPerformed
+        // TODO add your handling code here:
+        item = new MangoJuice();
+        clickButton();
+    }//GEN-LAST:event_mangoJuiceButtonActionPerformed
+
+    private void orangeJuiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orangeJuiceButtonActionPerformed
+        // TODO add your handling code here:
+        item = new OrangeJuice();
+        clickButton();
+    }//GEN-LAST:event_orangeJuiceButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ShoppingCartButton;
     private javax.swing.JButton ciderButton;
     private javax.swing.JButton cokeButton;
-    private javax.swing.JLabel countOrder;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -228,5 +296,6 @@ public class BeverageFrame extends javax.swing.JFrame {
     private javax.swing.JButton mangoJuiceButton;
     private javax.swing.JButton orangeJuiceButton;
     private javax.swing.JButton previousFrameButton;
+    private javax.swing.JLabel setCountOrder;
     // End of variables declaration//GEN-END:variables
 }

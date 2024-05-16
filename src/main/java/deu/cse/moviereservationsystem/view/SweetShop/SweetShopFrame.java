@@ -4,6 +4,7 @@
  */
 package deu.cse.moviereservationsystem.view.SweetShop;
 
+import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
 import deu.cse.moviereservationsystem.view.InputImage;
 import deu.cse.moviereservationsystem.view.User.UserMainFrame;
 
@@ -16,11 +17,28 @@ public class SweetShopFrame extends javax.swing.JFrame {
     /**
      * Creates new form SweetShopFrame
      */
+    private static SweetShopFrame instance; 
+    OrderList orderList = OrderList.getInstance();
+    BeverageFrame beverage = BeverageFrame.getInstance();
+    ShoppingCartFrame shopping = ShoppingCartFrame.getInstance();
+    PopcornFrame popcorn = PopcornFrame.getInstance();
+    
     InputImage input = new InputImage();
-    public SweetShopFrame() {
+    
+    private SweetShopFrame() {
         initComponents();
         setLocationRelativeTo(null);
         inputImage();
+        beverage.setOrder(orderList); //OrderFrame 옵저버 등록
+        shopping.setOrder(orderList);
+        popcorn.setOrder(orderList);
+    }
+    
+    public static SweetShopFrame getInstance() { //싱글턴 패턴 사용
+        if (instance == null) { // 인스턴스가 없는 경우에만 생성
+            instance = new SweetShopFrame(); // 매개변수 없는 생성자 호출
+        }
+        return instance;
     }
     
     private void inputImage(){
@@ -28,6 +46,8 @@ public class SweetShopFrame extends javax.swing.JFrame {
         input.imageLabel("/image/Popcorn.png", jLabel3);
         input.imageButt("/image/ShoppingCart.png", ShoppingCartButton);
     }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,6 +66,8 @@ public class SweetShopFrame extends javax.swing.JFrame {
         PopcornFrameButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        setCountOrder = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -109,6 +131,12 @@ public class SweetShopFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel6.setText("주문갯수 : ");
+
+        setCountOrder.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        setCountOrder.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,12 +157,22 @@ public class SweetShopFrame extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(79, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(setCountOrder)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(124, 124, 124)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(setCountOrder))
+                .addGap(92, 92, 92)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -150,14 +188,14 @@ public class SweetShopFrame extends javax.swing.JFrame {
 
     private void BeverageFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeverageFrameButtonActionPerformed
         // TODO add your handling code here:
-        BeverageFrame beverage = new BeverageFrame();
+        BeverageFrame beverage = BeverageFrame.getInstance();
         beverage.setVisible(true);
         dispose();
     }//GEN-LAST:event_BeverageFrameButtonActionPerformed
 
     private void PopcornFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PopcornFrameButtonActionPerformed
         // TODO add your handling code here:
-        PopcornFrame popcorn = new PopcornFrame();
+        PopcornFrame popcorn =PopcornFrame.getInstance();
         popcorn.setVisible(true);
         dispose();
     }//GEN-LAST:event_PopcornFrameButtonActionPerformed
@@ -171,7 +209,7 @@ public class SweetShopFrame extends javax.swing.JFrame {
 
     private void ShoppingCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShoppingCartButtonActionPerformed
         // TODO add your handling code here:
-        ShoppingCartFrame cart = new ShoppingCartFrame();
+        ShoppingCartFrame cart =ShoppingCartFrame.getInstance();
         cart.setVisible(true);
         dispose();
     }//GEN-LAST:event_ShoppingCartButtonActionPerformed
@@ -184,7 +222,9 @@ public class SweetShopFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton previousFrameButton;
+    private javax.swing.JLabel setCountOrder;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,22 +4,85 @@
  */
 package deu.cse.moviereservationsystem.view.SweetShop;
 
+import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Displayment;
+import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Observer;
+import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
 import deu.cse.moviereservationsystem.view.InputImage;
 import deu.cse.moviereservationsystem.view.Payment.SweetShopPayFrame;
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author LG
  */
-public class ShoppingCartFrame extends javax.swing.JFrame {
+public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, Displayment {
 
     /**
      * Creates new form ShoppingCartFrame
      */
-    public ShoppingCartFrame() {
+    private ShoppingCartFrame() {
         initComponents();
         setLocationRelativeTo(null);
+        model = (DefaultTableModel) shoppingCartTable.getModel();
     }
+    private String menu;
+    private String size;
+    private int cost;
+
+    DefaultTableModel model; //JTable 객체
+    private static ShoppingCartFrame instance; // 인스턴스 변수 선언
+    private OrderList order; //subject 객체
+
+    public static ShoppingCartFrame getInstance() { //싱글턴 패턴 사용
+        if (instance == null) { // 인스턴스가 없는 경우에만 생성
+            instance = new ShoppingCartFrame(); // 매개변수 없는 생성자 호출
+        }
+        return instance;
+    }
+
+    public void setOrder(OrderList order) { // 매개변수가 order인 생성자 호출
+        this.order = order;
+        order.addObserver(this);
+    }
+
+    private void send_InitialValue() {
+        this.menu = "";
+        this.size = "";
+        this.cost = 0;
+        OrderList order = OrderList.getInstance();
+        order.receiveOrderList(menu, size, cost);
+    }
+
+    private void removeObserver() {
+        OrderList orderList = OrderList.getInstance();
+        ShoppingCartFrame shopping = ShoppingCartFrame.getInstance();
+        BeverageFrame beverage = BeverageFrame.getInstance();
+        PopcornFrame popcorn = PopcornFrame.getInstance();
+        orderList.removeObserver(shopping); //옵저버 삭제(구독 알림 x)
+        orderList.removeObserver(beverage); //옵저버 삭제(구독 알림 x)
+        orderList.removeObserver(popcorn); //옵저버 삭제(구독 알림 x)
+    }
+
+    @Override
+    public void updateObserver(String menu, String size, int cost, int CountderOrder) {
+        this.menu = menu;
+        this.size = size;
+        this.cost = cost;
+
+        display();
+    }
+
+    @Override
+    public void display() {
+        inputTable();
+    }
+
+    public void inputTable() { //subject로부터 전달받은 주문목록을 테이블에 넣는 메서드
+        Object[] rowData = {menu, cost, size};
+        model.addRow(rowData);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,7 +96,7 @@ public class ShoppingCartFrame extends javax.swing.JFrame {
         previousFrameButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        shoppingCartTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,18 +133,23 @@ public class ShoppingCartFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1)))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        shoppingCartTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "메뉴", "가격", "사이즈"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(shoppingCartTable);
 
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
@@ -122,14 +190,18 @@ public class ShoppingCartFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        SweetShopPayFrame pay = new SweetShopPayFrame();
+        /*SweetShopPayFrame pay = new SweetShopPayFrame();
         pay.setVisible(true);
-        dispose();
+        dispose();*/
+        send_InitialValue();
+        removeObserver();
+        
+        model.setRowCount(0); //장바구니 초기화
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
         // TODO add your handling code here:
-        SweetShopFrame cart = new SweetShopFrame();
+        SweetShopFrame cart = SweetShopFrame.getInstance();
         cart.setVisible(true);
         dispose();
     }//GEN-LAST:event_previousFrameButtonActionPerformed
@@ -139,7 +211,7 @@ public class ShoppingCartFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton previousFrameButton;
+    private javax.swing.JTable shoppingCartTable;
     // End of variables declaration//GEN-END:variables
 }

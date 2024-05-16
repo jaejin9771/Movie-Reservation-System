@@ -4,6 +4,10 @@
  */
 package deu.cse.moviereservationsystem.view.SweetShop;
 
+import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Beverage.BeverageDecorator.*;
+import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Items;
+import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
+import deu.cse.moviereservationsystem.Pattern.SweetShopStrategy.SizeStratrgy.SizeOptions;
 import deu.cse.moviereservationsystem.view.InputImage;
 import javax.swing.JFrame;
 
@@ -11,22 +15,37 @@ import javax.swing.JFrame;
  *
  * @author LG
  */
-public class AddOptionButton extends javax.swing.JFrame {
+public class AddOptionFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form addOptionButton
      */
-     InputImage input = new InputImage();
-    public AddOptionButton() {
+    InputImage input = new InputImage();
+    Items item;
+    boolean clickSize = false; //사이즈 클릭 감지
+    boolean clickOption = false; //옵션 클릭 감지
+
+    private String menu;
+    private String size;
+    private int cost;
+
+    SizeOptions s = new SizeOptions("S");
+    SizeOptions m = new SizeOptions("M");
+    SizeOptions l = new SizeOptions("L");
+
+    public AddOptionFrame(Items item) {
+        this.item = item;
         initComponents();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); //창 숨김
         inputImage();
     }
-        private void inputImage() {
+
+    private void inputImage() {
         input.imageLabel("/image/Ice.png", jLabel3);
         input.imageLabel("/image/NoIce.png", jLabel2);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,9 +61,9 @@ public class AddOptionButton extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         IceOptionButton = new javax.swing.JButton();
         noIceOptionButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        SizeS_button = new javax.swing.JButton();
+        SizeM_button = new javax.swing.JButton();
+        SizeL_button = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         addOrderButton = new javax.swing.JButton();
@@ -87,19 +106,44 @@ public class AddOptionButton extends javax.swing.JFrame {
 
         IceOptionButton.setBackground(new java.awt.Color(224, 224, 224));
         IceOptionButton.setText("담기");
+        IceOptionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IceOptionButtonActionPerformed(evt);
+            }
+        });
 
         noIceOptionButton.setBackground(new java.awt.Color(224, 224, 224));
         noIceOptionButton.setText("담기");
+        noIceOptionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                noIceOptionButtonActionPerformed(evt);
+            }
+        });
 
-        jButton1.setBackground(new java.awt.Color(224, 224, 224));
-        jButton1.setText("S");
-        jButton1.setToolTipText("");
+        SizeS_button.setBackground(new java.awt.Color(224, 224, 224));
+        SizeS_button.setText("S");
+        SizeS_button.setToolTipText("");
+        SizeS_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SizeS_buttonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setBackground(new java.awt.Color(224, 224, 224));
-        jButton2.setText("M");
+        SizeM_button.setBackground(new java.awt.Color(224, 224, 224));
+        SizeM_button.setText("M");
+        SizeM_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SizeM_buttonActionPerformed(evt);
+            }
+        });
 
-        jButton3.setBackground(new java.awt.Color(224, 224, 224));
-        jButton3.setText("L");
+        SizeL_button.setBackground(new java.awt.Color(224, 224, 224));
+        SizeL_button.setText("L");
+        SizeL_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SizeL_buttonActionPerformed(evt);
+            }
+        });
 
         addOrderButton.setBackground(new java.awt.Color(204, 204, 204));
         addOrderButton.setText("담기");
@@ -118,11 +162,11 @@ public class AddOptionButton extends javax.swing.JFrame {
                 .addGap(94, 94, 94)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SizeS_button, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SizeM_button, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SizeL_button, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(8, 8, 8))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(IceOptionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -154,10 +198,10 @@ public class AddOptionButton extends javax.swing.JFrame {
                     .addComponent(noIceOptionButton))
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SizeL_button, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(SizeM_button, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SizeS_button, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34)
                 .addComponent(addOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
@@ -167,27 +211,76 @@ public class AddOptionButton extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOrderButtonActionPerformed
-        // TODO add your handling code here:
-        SweetShopFrame cart = new SweetShopFrame();
-        cart.setVisible(true);
-        dispose();
+        if (clickSize) {
+            OrderList order = OrderList.getInstance();
+            order.receiveOrderList(menu, size, cost);
+            BeverageFrame beverage = BeverageFrame.getInstance();
+            beverage.setVisible(true);
+            dispose();
+        } else
+            System.out.println("모든 옵션을 선택해주세요");
     }//GEN-LAST:event_addOrderButtonActionPerformed
 
     private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
         // TODO add your handling code here:
-        BeverageFrame beverage = new BeverageFrame();
+        BeverageFrame beverage = BeverageFrame.getInstance();
         beverage.setVisible(true);
         dispose();
     }//GEN-LAST:event_previousFrameButtonActionPerformed
 
+    private void IceOptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IceOptionButtonActionPerformed
+        // TODO add your handling code here:
+        item = new IceOption(item);
+        menu = item.getDescription();
+        cost = item.cost();
+        clickOption = true;
+    }//GEN-LAST:event_IceOptionButtonActionPerformed
+
+    private void noIceOptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noIceOptionButtonActionPerformed
+        // TODO add your handling code here:
+        item = new NoIceOption(item);
+        menu = item.getDescription();
+        cost = item.cost();
+        clickOption = true;
+    }//GEN-LAST:event_noIceOptionButtonActionPerformed
+
+    private void SizeS_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeS_buttonActionPerformed
+        // TODO add your handling code here:
+        if (!clickSize && clickOption) {
+            size = s.getSize();
+            cost += s.getCost();
+            clickSize = true;
+        } else
+            System.out.println("옵션을 먼저 선택해주세요.");
+    }//GEN-LAST:event_SizeS_buttonActionPerformed
+
+    private void SizeM_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeM_buttonActionPerformed
+        // TODO add your handling code here:
+        if (!clickSize && clickOption) {
+            size = m.getSize();
+            cost += m.getCost();
+            clickSize = true;
+        } else
+            System.out.println("옵션을 먼저 선택해주세요.");
+    }//GEN-LAST:event_SizeM_buttonActionPerformed
+
+    private void SizeL_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeL_buttonActionPerformed
+        // TODO add your handling code here:
+        if (!clickSize && clickOption) {
+            size = l.getSize();
+            cost += l.getCost();
+            clickSize = true;
+        } else
+            System.out.println("옵션을 먼저 선택해주세요.");
+    }//GEN-LAST:event_SizeL_buttonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton IceOptionButton;
+    private javax.swing.JButton SizeL_button;
+    private javax.swing.JButton SizeM_button;
+    private javax.swing.JButton SizeS_button;
     private javax.swing.JButton addOrderButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
