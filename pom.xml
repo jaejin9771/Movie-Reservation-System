@@ -9,6 +9,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>com.mycompany.moviereservationsystem.MovieReservationSystem</exec.mainClass>
+        <exec.mainClass>deu.cse.moviereservationsystem.MovieReservationSystem</exec.mainClass>
     </properties>
 </project>
