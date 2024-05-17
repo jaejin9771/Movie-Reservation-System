@@ -7,9 +7,8 @@ package deu.cse.moviereservationsystem.view.SweetShop;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Displayment;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Observer;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
-import deu.cse.moviereservationsystem.view.InputImage;
 import deu.cse.moviereservationsystem.view.Payment.SweetShopPayFrame;
-import javax.swing.JFrame;
+import deu.cse.moviereservationsystem.view.SweetShopFacade;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,6 +25,7 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
         setLocationRelativeTo(null);
         model = (DefaultTableModel) shoppingCartTable.getModel();
     }
+    
     private String menu;
     private String size;
     private int cost;
@@ -55,13 +55,8 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
     }
 
     private void removeObserver() {
-        OrderList orderList = OrderList.getInstance();
-        ShoppingCartFrame shopping = ShoppingCartFrame.getInstance();
-        BeverageFrame beverage = BeverageFrame.getInstance();
-        PopcornFrame popcorn = PopcornFrame.getInstance();
-        orderList.removeObserver(shopping); //옵저버 삭제(구독 알림 x)
-        orderList.removeObserver(beverage); //옵저버 삭제(구독 알림 x)
-        orderList.removeObserver(popcorn); //옵저버 삭제(구독 알림 x)
+        SweetShopFacade facade = new SweetShopFacade();
+        facade.offObserver();
     }
 
     @Override
@@ -97,7 +92,7 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         shoppingCartTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        PaymentFrame = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,12 +146,12 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
         });
         jScrollPane1.setViewportView(shoppingCartTable);
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        jButton1.setText("결제");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        PaymentFrame.setBackground(new java.awt.Color(204, 204, 204));
+        PaymentFrame.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        PaymentFrame.setText("결제");
+        PaymentFrame.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                PaymentFrameActionPerformed(evt);
             }
         });
 
@@ -171,7 +166,7 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(PaymentFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -181,23 +176,23 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(PaymentFrame, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void PaymentFrameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentFrameActionPerformed
         // TODO add your handling code here:
-        /*SweetShopPayFrame pay = new SweetShopPayFrame();
+        SweetShopPayFrame pay = new SweetShopPayFrame();
         pay.setVisible(true);
-        dispose();*/
+        dispose();
         send_InitialValue();
         removeObserver();
         
         model.setRowCount(0); //장바구니 초기화
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_PaymentFrameActionPerformed
 
     private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
         // TODO add your handling code here:
@@ -207,7 +202,7 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
     }//GEN-LAST:event_previousFrameButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton PaymentFrame;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

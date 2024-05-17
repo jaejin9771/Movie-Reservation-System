@@ -63,6 +63,7 @@ deu\cse\moviereservationsystem\view\SweetShop\SweetShopFrame$3.class
 deu\cse\moviereservationsystem\view\SweetShop\BeverageFrame$3.class
 deu\cse\moviereservationsystem\view\SweetShop\ShoppingCartFrame$2.class
 deu\cse\moviereservationsystem\view\SweetShop\AddOptionFrame.class
+deu\cse\moviereservationsystem\view\Payment\SweetShopPayFrame$1.class
 deu\cse\moviereservationsystem\view\SweetShop\AddSeasoningFrame$5.class
 deu\cse\moviereservationsystem\view\User\UserMainFrame.class
 deu\cse\moviereservationsystem\view\SweetShop\AddSeasoningFrame.class
@@ -87,6 +88,7 @@ deu\cse\moviereservationsystem\view\User\LoginFrame.class
 deu\cse\moviereservationsystem\view\SweetShop\PopcornFrame$4.class
 deu\cse\moviereservationsystem\Pattern\SweetShopStrategy\SizeStratrgy\SizeM.class
 deu\cse\moviereservationsystem\view\Movie\MovieDateFrame$2.class
+deu\cse\moviereservationsystem\view\SweetShopFacade.class
 deu\cse\moviereservationsystem\view\User\LoginFrame$2.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Popcorn\PopcornDecorator\GarlicSeasoning.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Beverage\Cider.class

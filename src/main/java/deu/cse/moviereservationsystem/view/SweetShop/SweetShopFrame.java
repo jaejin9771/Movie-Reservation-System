@@ -4,50 +4,60 @@
  */
 package deu.cse.moviereservationsystem.view.SweetShop;
 
+import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Displayment;
+import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Observer;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
 import deu.cse.moviereservationsystem.view.InputImage;
+import deu.cse.moviereservationsystem.view.SweetShopFacade;
 import deu.cse.moviereservationsystem.view.User.UserMainFrame;
 
 /**
  *
  * @author LG
  */
-public class SweetShopFrame extends javax.swing.JFrame {
+public class SweetShopFrame extends javax.swing.JFrame implements Observer,Displayment{
 
     /**
      * Creates new form SweetShopFrame
      */
     private static SweetShopFrame instance; 
-    OrderList orderList = OrderList.getInstance();
-    BeverageFrame beverage = BeverageFrame.getInstance();
-    ShoppingCartFrame shopping = ShoppingCartFrame.getInstance();
-    PopcornFrame popcorn = PopcornFrame.getInstance();
     
     InputImage input = new InputImage();
+    int countOrder;
+    private OrderList order;
     
     private SweetShopFrame() {
         initComponents();
         setLocationRelativeTo(null);
         inputImage();
-        beverage.setOrder(orderList); //OrderFrame 옵저버 등록
-        shopping.setOrder(orderList);
-        popcorn.setOrder(orderList);
     }
     
-    public static SweetShopFrame getInstance() { //싱글턴 패턴 사용
+   public static SweetShopFrame getInstance() { //싱글턴 패턴 사용
         if (instance == null) { // 인스턴스가 없는 경우에만 생성
             instance = new SweetShopFrame(); // 매개변수 없는 생성자 호출
         }
         return instance;
     }
-    
+    public void setOrder(OrderList order) {
+        this.order = order;
+        order.addObserver(this);
+    }
     private void inputImage(){
         input.imageLabel("/image/Beverage.png", jLabel2);
         input.imageLabel("/image/Popcorn.png", jLabel3);
         input.imageButt("/image/ShoppingCart.png", ShoppingCartButton);
     }
     
-    
+     @Override
+    public void updateObserver(String menu, String size, int cost, int countOrder) {
+        this.countOrder = countOrder;
+        display();
+    }
+
+    @Override
+    public void display() {
+        setCountOrder.setText(Integer.toString(countOrder));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,8 +76,8 @@ public class SweetShopFrame extends javax.swing.JFrame {
         PopcornFrameButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         setCountOrder = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -131,11 +141,11 @@ public class SweetShopFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        jLabel6.setText("주문갯수 : ");
-
         setCountOrder.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         setCountOrder.setText("0");
+
+        jLabel6.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        jLabel6.setText("주문갯수 : ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,7 +170,7 @@ public class SweetShopFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(setCountOrder)
                 .addContainerGap())
         );
@@ -187,29 +197,28 @@ public class SweetShopFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BeverageFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BeverageFrameButtonActionPerformed
-        // TODO add your handling code here:
         BeverageFrame beverage = BeverageFrame.getInstance();
         beverage.setVisible(true);
         dispose();
     }//GEN-LAST:event_BeverageFrameButtonActionPerformed
 
     private void PopcornFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PopcornFrameButtonActionPerformed
-        // TODO add your handling code here:
         PopcornFrame popcorn =PopcornFrame.getInstance();
         popcorn.setVisible(true);
         dispose();
     }//GEN-LAST:event_PopcornFrameButtonActionPerformed
 
     private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
-        // TODO add your handling code here:
+        SweetShopFacade facade = new SweetShopFacade();
+        facade.offObserver();
+        
         UserMainFrame user = new UserMainFrame();
         user.setVisible(true);
         dispose();
     }//GEN-LAST:event_previousFrameButtonActionPerformed
 
     private void ShoppingCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShoppingCartButtonActionPerformed
-        // TODO add your handling code here:
-        ShoppingCartFrame cart =ShoppingCartFrame.getInstance();
+       ShoppingCartFrame cart =ShoppingCartFrame.getInstance();
         cart.setVisible(true);
         dispose();
     }//GEN-LAST:event_ShoppingCartButtonActionPerformed
@@ -227,4 +236,6 @@ public class SweetShopFrame extends javax.swing.JFrame {
     private javax.swing.JButton previousFrameButton;
     private javax.swing.JLabel setCountOrder;
     // End of variables declaration//GEN-END:variables
+
+  
 }

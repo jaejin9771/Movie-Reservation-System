@@ -8,6 +8,7 @@ import deu.cse.moviereservationsystem.view.MainFrame;
 import deu.cse.moviereservationsystem.view.Movie.MovieScreeningFrame;
 import deu.cse.moviereservationsystem.view.Payment.PaymentFrame;
 import deu.cse.moviereservationsystem.view.SweetShop.SweetShopFrame;
+import deu.cse.moviereservationsystem.view.SweetShopFacade;
 
 /**
  *
@@ -166,9 +167,13 @@ public class UserMainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        SweetShopFrame shop = SweetShopFrame.getInstance();
-        shop.setVisible(true);
+        SweetShopFacade facade = new SweetShopFacade();
+        facade.onObserver();
+        
+        SweetShopFrame cart = SweetShopFrame.getInstance();
+        cart.setVisible(true);
         dispose();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void paymentFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentFrameButtonActionPerformed

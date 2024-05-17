@@ -251,33 +251,28 @@ public class BeverageFrame extends javax.swing.JFrame implements Observer, Displ
     }//GEN-LAST:event_cokeButtonActionPerformed
 
     private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
-        // TODO add your handling code here:
         SweetShopFrame cart = SweetShopFrame.getInstance();
         cart.setVisible(true);
         dispose();
     }//GEN-LAST:event_previousFrameButtonActionPerformed
 
     private void ShoppingCartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ShoppingCartButtonActionPerformed
-        // TODO add your handling code here:
          ShoppingCartFrame cart = ShoppingCartFrame.getInstance();
         cart.setVisible(true);
         dispose();
     }//GEN-LAST:event_ShoppingCartButtonActionPerformed
 
     private void ciderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ciderButtonActionPerformed
-        // TODO add your handling code here:
         item = new Cider();
         clickButton();
     }//GEN-LAST:event_ciderButtonActionPerformed
 
     private void mangoJuiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mangoJuiceButtonActionPerformed
-        // TODO add your handling code here:
-        item = new MangoJuice();
+       item = new MangoJuice();
         clickButton();
     }//GEN-LAST:event_mangoJuiceButtonActionPerformed
 
     private void orangeJuiceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orangeJuiceButtonActionPerformed
-        // TODO add your handling code here:
         item = new OrangeJuice();
         clickButton();
     }//GEN-LAST:event_orangeJuiceButtonActionPerformed
