@@ -37,6 +37,7 @@ deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Popcorn\CaramelPopcorn
 deu\cse\moviereservationsystem\view\SweetShop\SweetShopFrame$2.class
 deu\cse\moviereservationsystem\view\SweetShop\AddOptionFrame$2.class
 deu\cse\moviereservationsystem\view\Movie\MovieSeatFrame.class
+deu\cse\moviereservationsystem\DTO\ShoppingCartDTO.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Popcorn\BasicsPopcorn.class
 deu\cse\moviereservationsystem\view\SweetShop\AddSeasoningFrame$8.class
 deu\cse\moviereservationsystem\view\Movie\MovieScreeningFrame$2.class
@@ -99,5 +100,6 @@ deu\cse\moviereservationsystem\view\User\UserMainFrame$1.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Beverage\Coke.class
 deu\cse\moviereservationsystem\view\SweetShop\AddOptionFrame$6.class
 deu\cse\moviereservationsystem\view\SweetShop\ShoppingCartFrame$3.class
+deu\cse\moviereservationsystem\DTO\ShoppingCartDTO$ShoppingCartBuilder.class
 deu\cse\moviereservationsystem\view\SweetShop\AddSeasoningFrame$4.class
 deu\cse\moviereservationsystem\view\SweetShop\ShoppingCartFrame.class
