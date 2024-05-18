@@ -4,7 +4,10 @@
  */
 package deu.cse.moviereservationsystem.view.Payment;
 
+import deu.cse.moviereservationsystem.DTO.ShoppingCartDTO;
 import deu.cse.moviereservationsystem.view.User.UserMainFrame;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,9 +18,33 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
     /**
      * Creates new form SweetShopPayFrame
      */
-    public SweetShopPayFrame() {
+    List<ShoppingCartDTO> orderList = new ArrayList<>();
+
+    public SweetShopPayFrame(List<ShoppingCartDTO> orderList) {
+        this.orderList = orderList;
         initComponents();
         setLocationRelativeTo(null);
+        setOrderList();
+        setTotalCost();
+    }
+
+    private void setOrderList() {
+        //StringBuilder: Java에서 문자열을 조작
+        //내부버퍼를 사용하여 문자열을 효율적으로 수정하고 연결한다.
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < orderList.size(); i++) {
+            // 각 항목을 StringBuilder에 추가하고 줄 바꿈 문자를 추가
+            sb.append(orderList.get(i)).append("\n");
+        }
+        orderTextArea.setText(sb.toString());
+    }
+
+    private void setTotalCost() {
+        int totalPrice = 0;
+       for (ShoppingCartDTO item : orderList) {
+           
+        }
+
     }
 
     /**
@@ -40,7 +67,7 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        intputOrderList = new javax.swing.JTextArea();
+        orderTextArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,9 +127,9 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel4.setText("주문내역 :");
 
-        intputOrderList.setColumns(20);
-        intputOrderList.setRows(5);
-        jScrollPane1.setViewportView(intputOrderList);
+        orderTextArea.setColumns(20);
+        orderTextArea.setRows(5);
+        jScrollPane1.setViewportView(orderTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,7 +197,6 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
     private javax.swing.JButton cardButton;
     private javax.swing.JButton cashButton;
     private javax.swing.JTextField inputPaymentPrice;
-    private javax.swing.JTextArea intputOrderList;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -178,6 +204,7 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea orderTextArea;
     private javax.swing.JButton previousFrameButton;
     // End of variables declaration//GEN-END:variables
 }

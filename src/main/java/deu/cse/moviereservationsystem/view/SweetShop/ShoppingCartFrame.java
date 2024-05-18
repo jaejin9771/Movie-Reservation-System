@@ -4,11 +4,14 @@
  */
 package deu.cse.moviereservationsystem.view.SweetShop;
 
+import deu.cse.moviereservationsystem.DTO.ShoppingCartDTO;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Displayment;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Observer;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
 import deu.cse.moviereservationsystem.view.Payment.SweetShopPayFrame;
 import deu.cse.moviereservationsystem.view.SweetShopFacade;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,12 +23,9 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
     /**
      * Creates new form ShoppingCartFrame
      */
-    private ShoppingCartFrame() {
-        initComponents();
-        setLocationRelativeTo(null);
-        model = (DefaultTableModel) shoppingCartTable.getModel();
-    }
-    
+    ShoppingCartDTO dto;
+    List<ShoppingCartDTO> orderList = new ArrayList<>();
+
     private String menu;
     private String size;
     private int cost;
@@ -33,6 +33,12 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
     DefaultTableModel model; //JTable 객체
     private static ShoppingCartFrame instance; // 인스턴스 변수 선언
     private OrderList order; //subject 객체
+
+    private ShoppingCartFrame() {
+        initComponents();
+        setLocationRelativeTo(null);
+        model = (DefaultTableModel) shoppingCartTable.getModel();
+    }
 
     public static ShoppingCartFrame getInstance() { //싱글턴 패턴 사용
         if (instance == null) { // 인스턴스가 없는 경우에만 생성
@@ -46,7 +52,7 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
         order.addObserver(this);
     }
 
-    private void send_InitialValue() {
+    private void requestDeleteObserver() {
         this.menu = "";
         this.size = "";
         this.cost = 0;
@@ -76,6 +82,18 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
     public void inputTable() { //subject로부터 전달받은 주문목록을 테이블에 넣는 메서드
         Object[] rowData = {menu, cost, size};
         model.addRow(rowData);
+    }
+
+    private void sendShoppingCartDTO() {
+        for (int i = 0; i < model.getRowCount(); i++) {
+            dto = new ShoppingCartDTO.ShoppingCartBuilder()
+                    .menu(model.getValueAt(i, 0))
+                    .cost(model.getValueAt(i, 1))
+                    .size(model.getValueAt(i, 2))
+                    .build();
+
+            orderList.add(dto);
+        }
     }
 
     /**
@@ -161,11 +179,12 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(PaymentFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -184,13 +203,14 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
     }// </editor-fold>//GEN-END:initComponents
 
     private void PaymentFrameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentFrameActionPerformed
-        // TODO add your handling code here:
-        SweetShopPayFrame pay = new SweetShopPayFrame();
+        sendShoppingCartDTO();
+        requestDeleteObserver();
+        removeObserver();
+
+        SweetShopPayFrame pay = new SweetShopPayFrame(orderList);
         pay.setVisible(true);
         dispose();
-        send_InitialValue();
-        removeObserver();
-        
+
         model.setRowCount(0); //장바구니 초기화
     }//GEN-LAST:event_PaymentFrameActionPerformed
 

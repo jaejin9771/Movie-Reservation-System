@@ -10,6 +10,7 @@ import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
 import deu.cse.moviereservationsystem.Pattern.SweetShopStrategy.SizeStratrgy.SizeOptions;
 import deu.cse.moviereservationsystem.view.InputImage;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -214,11 +215,12 @@ public class AddOptionFrame extends javax.swing.JFrame {
         if (clickSize) {
             OrderList order = OrderList.getInstance();
             order.receiveOrderList(menu, size, cost);
+            
             BeverageFrame beverage = BeverageFrame.getInstance();
             beverage.setVisible(true);
             dispose();
         } else
-            System.out.println("모든 옵션을 선택해주세요");
+            JOptionPane.showMessageDialog(null, "사이즈를 선택해주세요.");
     }//GEN-LAST:event_addOrderButtonActionPerformed
 
     private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
@@ -251,7 +253,7 @@ public class AddOptionFrame extends javax.swing.JFrame {
             cost += s.getCost();
             clickSize = true;
         } else
-            System.out.println("옵션을 먼저 선택해주세요.");
+            JOptionPane.showMessageDialog(null, "옵션을 선택해주세요.");
     }//GEN-LAST:event_SizeS_buttonActionPerformed
 
     private void SizeM_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeM_buttonActionPerformed
@@ -261,7 +263,7 @@ public class AddOptionFrame extends javax.swing.JFrame {
             cost += m.getCost();
             clickSize = true;
         } else
-            System.out.println("옵션을 먼저 선택해주세요.");
+           JOptionPane.showMessageDialog(null, "옵션을 선택해주세요.");
     }//GEN-LAST:event_SizeM_buttonActionPerformed
 
     private void SizeL_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeL_buttonActionPerformed
@@ -271,7 +273,7 @@ public class AddOptionFrame extends javax.swing.JFrame {
             cost += l.getCost();
             clickSize = true;
         } else
-            System.out.println("옵션을 먼저 선택해주세요.");
+            JOptionPane.showMessageDialog(null, "옵션을 선택해주세요.");
     }//GEN-LAST:event_SizeL_buttonActionPerformed
 
 
