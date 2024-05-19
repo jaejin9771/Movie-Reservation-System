@@ -4,6 +4,8 @@
  */
 package deu.cse.moviereservationsystem.view.Payment;
 
+import deu.cse.moviereservationsystem.view.User.UserMainFrame;
+
 /**
  *
  * @author LG
@@ -39,6 +41,11 @@ public class PaymentFrame extends javax.swing.JFrame {
 
         previousFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         previousFrameButton.setText("←");
+        previousFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                previousFrameButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel1.setText("결제/주문내역 확인");
@@ -65,10 +72,20 @@ public class PaymentFrame extends javax.swing.JFrame {
         moviePayFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         moviePayFrameButton.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         moviePayFrameButton.setText("영화 결제내역 확인");
+        moviePayFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moviePayFrameButtonActionPerformed(evt);
+            }
+        });
 
         sweetShopFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         sweetShopFrameButton.setFont(new java.awt.Font("맑은 고딕", 1, 12)); // NOI18N
         sweetShopFrameButton.setText("스위트샵 주문내역 확인");
+        sweetShopFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sweetShopFrameButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,6 +112,27 @@ public class PaymentFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void moviePayFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moviePayFrameButtonActionPerformed
+        // TODO add your handling code here:
+        MoviePayDetailsFrame movie = new MoviePayDetailsFrame();
+        movie.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_moviePayFrameButtonActionPerformed
+
+    private void sweetShopFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sweetShopFrameButtonActionPerformed
+        // TODO add your handling code here:
+        SweetShopPayDetailsFrame shop = new SweetShopPayDetailsFrame();
+        shop.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_sweetShopFrameButtonActionPerformed
+
+    private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
+        // TODO add your handling code here:
+        UserMainFrame user = new UserMainFrame();
+        user.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_previousFrameButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

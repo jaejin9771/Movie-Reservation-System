@@ -5,7 +5,9 @@
 package deu.cse.moviereservationsystem.view.User;
 
 import deu.cse.moviereservationsystem.view.MainFrame;
+import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
