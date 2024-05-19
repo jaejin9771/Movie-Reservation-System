@@ -147,6 +147,7 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
         orderTextArea.setColumns(20);
         orderTextArea.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         orderTextArea.setRows(5);
+        orderTextArea.setEnabled(false);
         jScrollPane1.setViewportView(orderTextArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
