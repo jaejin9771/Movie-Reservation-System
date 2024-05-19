@@ -1,4 +1,5 @@
 deu\cse\moviereservationsystem\view\SweetShop\AddOptionFrame$4.class
+deu\cse\moviereservationsystem\Pattern\SweetShopFacade.class
 deu\cse\moviereservationsystem\view\User\FoundPWFrame$2.class
 deu\cse\moviereservationsystem\Pattern\SweetShopStrategy\SizeStratrgy\SizeL.class
 deu\cse\moviereservationsystem\view\SweetShop\AddSeasoningFrame$6.class
@@ -14,6 +15,7 @@ deu\cse\moviereservationsystem\view\User\UserMainFrame$2.class
 deu\cse\moviereservationsystem\view\SweetShop\SweetShopFrame$4.class
 deu\cse\moviereservationsystem\view\SweetShop\SweetShopFrame.class
 deu\cse\moviereservationsystem\view\Payment\MoviePayFrame.class
+deu\cse\moviereservationsystem\view\Payment\SweetShopPayFrame$2.class
 deu\cse\moviereservationsystem\view\SweetShop\SweetShopFrame$1.class
 deu\cse\moviereservationsystem\view\Payment\SweetShopPayFrame.class
 deu\cse\moviereservationsystem\view\User\FoundPWFrame.class
@@ -36,6 +38,7 @@ deu\cse\moviereservationsystem\view\User\LoginFrame$4.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Popcorn\CaramelPopcorn.class
 deu\cse\moviereservationsystem\view\SweetShop\SweetShopFrame$2.class
 deu\cse\moviereservationsystem\view\SweetShop\AddOptionFrame$2.class
+deu\cse\moviereservationsystem\view\Payment\SweetShopPayFrame$3.class
 deu\cse\moviereservationsystem\view\Movie\MovieSeatFrame.class
 deu\cse\moviereservationsystem\DTO\ShoppingCartDTO.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Popcorn\BasicsPopcorn.class
@@ -49,6 +52,7 @@ deu\cse\moviereservationsystem\view\User\ModifyUserInfoFrame$1.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Items.class
 deu\cse\moviereservationsystem\view\SweetShop\AddSeasoningFrame$1.class
 deu\cse\moviereservationsystem\view\Payment\PaymentFrame.class
+deu\cse\moviereservationsystem\view\Payment\SweetShopPayFrame$4.class
 deu\cse\moviereservationsystem\view\SweetShop\BeverageFrame$4.class
 deu\cse\moviereservationsystem\Pattern\SweetShopObserver\Observer.class
 deu\cse\moviereservationsystem\view\SweetShop\AddSeasoningFrame$7.class
@@ -89,7 +93,6 @@ deu\cse\moviereservationsystem\view\User\LoginFrame.class
 deu\cse\moviereservationsystem\view\SweetShop\PopcornFrame$4.class
 deu\cse\moviereservationsystem\Pattern\SweetShopStrategy\SizeStratrgy\SizeM.class
 deu\cse\moviereservationsystem\view\Movie\MovieDateFrame$2.class
-deu\cse\moviereservationsystem\view\SweetShopFacade.class
 deu\cse\moviereservationsystem\view\User\LoginFrame$2.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Popcorn\PopcornDecorator\GarlicSeasoning.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Beverage\Cider.class

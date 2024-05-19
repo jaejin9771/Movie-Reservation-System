@@ -9,7 +9,7 @@ import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Displayment;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Observer;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
 import deu.cse.moviereservationsystem.view.Payment.SweetShopPayFrame;
-import deu.cse.moviereservationsystem.view.SweetShopFacade;
+import deu.cse.moviereservationsystem.Pattern.SweetShopFacade;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -23,7 +23,7 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
     /**
      * Creates new form ShoppingCartFrame
      */
-    ShoppingCartDTO dto;
+    ShoppingCartDTO dto ;
     List<ShoppingCartDTO> orderList = new ArrayList<>();
 
     private String menu;
@@ -84,7 +84,7 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
         model.addRow(rowData);
     }
 
-    private void sendShoppingCartDTO() {
+    private void sendOrderListData() {
         for (int i = 0; i < model.getRowCount(); i++) {
             dto = new ShoppingCartDTO.ShoppingCartBuilder()
                     .menu(model.getValueAt(i, 0))
@@ -203,7 +203,7 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
     }// </editor-fold>//GEN-END:initComponents
 
     private void PaymentFrameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentFrameActionPerformed
-        sendShoppingCartDTO();
+        sendOrderListData();
         requestDeleteObserver();
         removeObserver();
 

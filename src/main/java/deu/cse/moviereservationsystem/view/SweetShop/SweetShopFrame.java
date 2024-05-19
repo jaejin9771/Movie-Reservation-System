@@ -8,7 +8,7 @@ import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Displayment;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Observer;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
 import deu.cse.moviereservationsystem.view.InputImage;
-import deu.cse.moviereservationsystem.view.SweetShopFacade;
+import deu.cse.moviereservationsystem.Pattern.SweetShopFacade;
 import deu.cse.moviereservationsystem.view.User.UserMainFrame;
 
 /**

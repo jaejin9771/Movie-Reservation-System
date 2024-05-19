@@ -8,7 +8,7 @@ import deu.cse.moviereservationsystem.view.MainFrame;
 import deu.cse.moviereservationsystem.view.Movie.MovieScreeningFrame;
 import deu.cse.moviereservationsystem.view.Payment.PaymentFrame;
 import deu.cse.moviereservationsystem.view.SweetShop.SweetShopFrame;
-import deu.cse.moviereservationsystem.view.SweetShopFacade;
+import deu.cse.moviereservationsystem.Pattern.SweetShopFacade;
 
 /**
  *
