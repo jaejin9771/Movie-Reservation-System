@@ -26,6 +26,7 @@ public class ShoppingCartDTO {
         private Object size;
         private Object cost;
 
+
         public ShoppingCartBuilder menu(Object menu) {
             this.menu = menu;
             return this;
@@ -47,8 +48,11 @@ public class ShoppingCartDTO {
     }
 
     public String toString() {
-        return "메뉴='" + menu + " "
-                + ", 사이즈='" + size + " "
-                + ", 가격='" + cost + " ";
+        return "메뉴 = '" + menu + '\'' +
+               ", 사이즈 = '" + size + '\'' +
+               ", 가격 = '" + cost + '\'';
     }
+    public Object getCost() {
+            return cost;
+        }
 }

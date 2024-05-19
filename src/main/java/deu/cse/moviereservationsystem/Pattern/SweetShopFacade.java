@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package deu.cse.moviereservationsystem.view;
+package deu.cse.moviereservationsystem.Pattern;
 
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
 import deu.cse.moviereservationsystem.view.SweetShop.BeverageFrame;
