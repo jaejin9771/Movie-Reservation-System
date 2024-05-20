@@ -10,6 +10,7 @@ deu\cse\moviereservationsystem\view\User\FoundIDFrame$2.class
 deu\cse\moviereservationsystem\view\User\UserMainFrame$5.class
 deu\cse\moviereservationsystem\view\SweetShop\AddSeasoningFrame$3.class
 deu\cse\moviereservationsystem\view\User\RegisterFrame$2.class
+deu\cse\moviereservationsystem\Entity\Movie\Movie$Builder.class
 deu\cse\moviereservationsystem\view\User\UserMainFrame$2.class
 deu\cse\moviereservationsystem\view\SweetShop\SweetShopFrame$4.class
 deu\cse\moviereservationsystem\view\SweetShop\SweetShopFrame.class
@@ -18,6 +19,7 @@ deu\cse\moviereservationsystem\view\SweetShop\SweetShopFrame$1.class
 deu\cse\moviereservationsystem\view\Payment\SweetShopPayFrame.class
 deu\cse\moviereservationsystem\view\User\FoundPWFrame.class
 deu\cse\moviereservationsystem\Pattern\SweetShopStrategy\SizeStratrgy\SizeOptions.class
+deu\cse\moviereservationsystem\Repository\MovieRepository.class
 deu\cse\moviereservationsystem\view\SweetShop\PopcornFrame.class
 deu\cse\moviereservationsystem\view\User\LoginFrame$3.class
 deu\cse\moviereservationsystem\view\SweetShop\PopcornFrame$2.class
@@ -49,6 +51,7 @@ deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Items.class
 deu\cse\moviereservationsystem\view\SweetShop\AddSeasoningFrame$1.class
 deu\cse\moviereservationsystem\view\Payment\PaymentFrame.class
 deu\cse\moviereservationsystem\view\SweetShop\BeverageFrame$4.class
+deu\cse\moviereservationsystem\Entity\Movie\Movie.class
 deu\cse\moviereservationsystem\Pattern\SweetShopObserver\Observer.class
 deu\cse\moviereservationsystem\view\SweetShop\AddSeasoningFrame$7.class
 deu\cse\moviereservationsystem\Pattern\SweetShopStrategy\SizeStratrgy\SizeChoice.class
@@ -74,6 +77,8 @@ deu\cse\moviereservationsystem\view\Movie\MovieDateFrame.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Beverage\Beverage.class
 deu\cse\moviereservationsystem\view\User\ModifyUserInfoFrame$2.class
 deu\cse\moviereservationsystem\view\User\FoundIDFrame$1.class
+deu\cse\moviereservationsystem\Dto\Movie\MovieDto$Builder.class
+deu\cse\moviereservationsystem\Dto\Movie\MovieDto.class
 deu\cse\moviereservationsystem\view\User\FoundPWFrame$1.class
 deu\cse\moviereservationsystem\view\User\LoginFrame$1.class
 deu\cse\moviereservationsystem\view\Movie\MovieScreeningFrame.class
@@ -92,6 +97,7 @@ deu\cse\moviereservationsystem\view\SweetShopFacade.class
 deu\cse\moviereservationsystem\view\User\LoginFrame$2.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Popcorn\PopcornDecorator\GarlicSeasoning.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Beverage\Cider.class
+deu\cse\moviereservationsystem\Repository\CrudRepository.class
 deu\cse\moviereservationsystem\Pattern\SweetShopStrategy\SizeStratrgy\Size.class
 deu\cse\moviereservationsystem\view\User\RegisterFrame.class
 deu\cse\moviereservationsystem\Pattern\SweetShopDecorator\Popcorn\PopcornDecorator\CheeseSeasoning.class
