@@ -4,7 +4,7 @@
  */
 package deu.cse.moviereservationsystem.view.SweetShop;
 
-import deu.cse.moviereservationsystem.DTO.ShoppingCartDTO;
+import deu.cse.moviereservationsystem.DTO.SweetShop.ShoppingCartDTO;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Displayment;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.Observer;
 import deu.cse.moviereservationsystem.Pattern.SweetShopObserver.OrderList;
@@ -87,9 +87,9 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
     private void sendOrderListData() {
         for (int i = 0; i < model.getRowCount(); i++) {
             dto = new ShoppingCartDTO.ShoppingCartBuilder()
-                    .menu(model.getValueAt(i, 0))
-                    .cost(model.getValueAt(i, 1))
-                    .size(model.getValueAt(i, 2))
+                    .menu((String)model.getValueAt(i, 0))
+                    .cost((Integer)model.getValueAt(i, 1))
+                    .size((String)model.getValueAt(i, 2))
                     .build();
 
             orderList.add(dto);
