@@ -38,11 +38,14 @@ public abstract class CrudRepository<T> {
      * @param item 파일에 추가할 객체
      */
     
-    public void create(T item) {
+    public T create(T item) {
         try (FileWriter fw = new FileWriter(filePath, true); BufferedWriter bw = new BufferedWriter(fw); PrintWriter out = new PrintWriter(bw)) {
             out.println(toString(item)); // 객체를 문자열로 변환하여 파일에 쓰기
+            System.out.println("영화 등록 성공!");
+            return item;
         } catch (IOException e) {
             System.err.println("파일 쓰기 중 오류 발생: " + e.getMessage());
+            return null;
         }
     }
 
