@@ -4,8 +4,12 @@
  */
 package deu.cse.moviereservationsystem.view.Payment;
 
-import deu.cse.moviereservationsystem.DTO.ShoppingCartDTO;
+import deu.cse.moviereservationsystem.DTO.SweetShop.ShoppingCartDTO;
+import deu.cse.moviereservationsystem.Entity.SweetShopEntity.SweetShop;
+import deu.cse.moviereservationsystem.Repository.CrudRepository;
+import deu.cse.moviereservationsystem.Repository.SweetShopRepository;
 import deu.cse.moviereservationsystem.view.User.UserMainFrame;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -21,6 +25,9 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
      */
     List<ShoppingCartDTO> orderList = new ArrayList<>();
     boolean clickPaymentMethod = false;
+    int totalPrice = 0;
+    String clickPayMT;
+    StringBuilder sb = new StringBuilder();
 
     public SweetShopPayFrame(List<ShoppingCartDTO> orderList) {
         this.orderList = orderList;
@@ -31,22 +38,37 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
     }
 
     private void setOrderList() {
-        //StringBuilder: Java에서 문자열을 조작
-        //내부버퍼를 사용하여 문자열을 효율적으로 수정하고 연결한다.
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < orderList.size(); i++) {
-            // 각 항목을 StringBuilder에 추가하고 줄 바꿈 문자를 추가
-            sb.append(orderList.get(i)).append("\n");
-        }
-        orderTextArea.setText(sb.toString());
+        orderTextArea.setText( toStringOrder().append("\n").toString());
     }
 
     private void setTotalCost() {
-        int totalPrice = 0;
-       for (ShoppingCartDTO item : orderList) {
+        for (ShoppingCartDTO item : orderList) {
             totalPrice += ((Number) item.getCost()).intValue();
         }
-       inputPaymentPrice.setText(String.valueOf(totalPrice));
+        inputPaymentPrice.setText(String.valueOf(totalPrice));
+    }
+
+    private StringBuilder toStringOrder() {
+        for (ShoppingCartDTO item : orderList) {
+            sb.append(item);
+        }
+        return sb;
+    }
+
+    private void successPay() {
+        LocalDate date = LocalDate.now();
+        String dateString = date.toString();
+        
+        SweetShop shop = new SweetShop.SweetShopBuilder()
+                .user("이지민") //로그인싱글턴 가져오기
+                .orderList(toStringOrder().toString())
+                .date(dateString)
+                .PaymentMethod(clickPayMT)
+                .Payment(totalPrice)
+                .build();
+        
+        CrudRepository mr = new SweetShopRepository();
+        mr.create(shop);
     }
 
     /**
@@ -210,19 +232,22 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
 
     private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payButtonActionPerformed
         // TODO add your handling code here:
-        if(clickPaymentMethod){
-        orderList.clear();
+        if (clickPaymentMethod) {
+            orderList.clear();
+            successPay();
         } else
             JOptionPane.showMessageDialog(null, "결제수단을 선택해주세요.");
     }//GEN-LAST:event_payButtonActionPerformed
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashButtonActionPerformed
         // TODO add your handling code here:
+        clickPayMT = "현금";
         clickPaymentMethod = true;
     }//GEN-LAST:event_cashButtonActionPerformed
 
     private void cardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardButtonActionPerformed
         // TODO add your handling code here:
+        clickPayMT = "카드";
         clickPaymentMethod = true;
     }//GEN-LAST:event_cardButtonActionPerformed
 
