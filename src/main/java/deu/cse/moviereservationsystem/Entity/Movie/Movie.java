@@ -11,7 +11,9 @@ import java.util.Objects;
  * @author jaejin
  */
 public class Movie {
+
     protected String title;
+    protected String genre;
     protected String director;
     protected int duration;
 
@@ -22,10 +24,12 @@ public class Movie {
         this.title = builder.title;
         this.director = builder.director;
         this.duration = builder.duration;
+        this.genre = builder.genre;
     }
 
-    public Movie(String title, String director, int duration) {
+    public Movie(String title, String genre, String director, int duration) {
         this.title = title;
+        this.genre = genre;
         this.director = director;
         this.duration = duration;
     }
@@ -46,13 +50,14 @@ public class Movie {
         Movie movie = (Movie) obj;
         return duration == movie.duration
                 && Objects.equals(title, movie.title)
-                && Objects.equals(director, movie.director);
+                && Objects.equals(director, movie.director)
+                && Objects.equals(genre, movie.genre);
     }
 
     @Override
     public int hashCode() {
         // Objects.hash를 사용하여 필드를 기반으로 해시 코드 생성
-        return Objects.hash(title, director, duration);
+        return Objects.hash(title, director, duration, genre);
     }
 
     public String getTitle() {
@@ -79,9 +84,18 @@ public class Movie {
         this.duration = duration;
     }
 
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
     public static class Builder {
 
         private String title;
+        private String genre;
         private String director;
         private int duration;
 
@@ -97,6 +111,11 @@ public class Movie {
 
         public Builder duration(int duration) {
             this.duration = duration;
+            return this;
+        }
+
+        public Builder genre(String genre) {
+            this.genre = genre;
             return this;
         }
 
