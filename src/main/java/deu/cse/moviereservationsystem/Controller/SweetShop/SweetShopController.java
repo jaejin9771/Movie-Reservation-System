@@ -37,37 +37,74 @@ public class SweetShopController {
         }
         return userOrder;
     }
-    public List<String> getDate(List<SweetShop> list){
-         List<String> st = new ArrayList<>();
-         for(SweetShop l : list){
+
+public List<String> getDate(List<SweetShop> list) {
+        List<String> st = new ArrayList<>();
+        for (SweetShop l : list) {
             st.add(l.getDate());
         }
-         return st;
+        return st;
     }
-    public List<Integer> getPayment(List<SweetShop> list){
-         List<Integer> st = new ArrayList<>();
-         for(SweetShop l : list){
+
+    public List<Integer> getPayment(List<SweetShop> list) {
+        List<Integer> st = new ArrayList<>();
+        for (SweetShop l : list) {
             st.add(l.getPayment());
         }
-         return st;
+        return st;
     }
-    public List<String> getPaymentMethod(List<SweetShop> list){
-         List<String> st = new ArrayList<>();
-         for(SweetShop l : list){
+
+    public List<String> getPaymentMethod(List<SweetShop> list) {
+        List<String> st = new ArrayList<>();
+        for (SweetShop l : list) {
             st.add(l.getPaymentMethod());
         }
-         return st;
+        return st;
     }
     
-    /*public void separateOrder(List<SweetShop> list){
+    // 메뉴, 사이즈, 가격을 저장할 리스트 생성
+    List<String> menus = new ArrayList<>();
+    List<String> sizes = new ArrayList<>();
+    List<Integer> costs = new ArrayList<>();
+
+    public void separateOrder(List<SweetShop> list) {
+        // SweetShop 객체 리스트에서 orderList 문자열을 추출하여 저장할 리스트 생성
         List<String> st = new ArrayList<>();
-        String[] menu = null;
-        for(SweetShop l : list){
+        // 각 orderList 문자열을 ';'로 분리하여 처리
+        for (SweetShop l : list) {
             st.add(l.getOrderList());
         }
-        for(String s : st){
-            menu = s.split("|");
+        for (String s : st) {
+            String[] items = s.split(";");
+            for (String i : items) {
+                // 각 아이템을 '|'로 분리하여 메뉴, 사이즈, 가격을 추출
+                String[] parts = i.split("\\|");
+                // 메뉴, 사이즈, 가격이 모두 있는 경우
+                if (parts.length == 3) {
+                    menus.add(parts[0]);
+                    sizes.add(parts[1]);
+                    costs.add(Integer.parseInt(parts[2]));
+                }
+                /*else if (parts.length == 2) {
+                    // 가격 정보가 없는 경우
+                    menus.add(parts[0]);
+                    sizes.add(parts[1]);
+                    costs.add(0); // 가격 정보가 없는 경우 0으로 설정
+                }*/
+            }
         }
-    }*/
-    
+    }
+
+    public List<String> getMenus() {
+        return menus;
+    }
+
+    public List<String> getSizes() {
+        return sizes;
+    }
+
+    public List<Integer> getCosts() {
+        return costs;
+    }
+
 }

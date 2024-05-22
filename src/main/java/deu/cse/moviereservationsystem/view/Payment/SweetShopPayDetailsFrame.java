@@ -22,7 +22,7 @@ public class SweetShopPayDetailsFrame extends javax.swing.JFrame {
     SweetShopController controller = new SweetShopController();
     List<SweetShop> order = controller.pickOrder("이지민");
     DefaultTableModel model; //JTable 객체
-    
+
     public SweetShopPayDetailsFrame() {
         initComponents();
         setLocationRelativeTo(null);
@@ -34,10 +34,19 @@ public class SweetShopPayDetailsFrame extends javax.swing.JFrame {
         List<String> dates = controller.getDate(order);
         List<Integer> payments = controller.getPayment(order);
         List<String> PaymentMethods = controller.getPaymentMethod(order);
-        int rowCount = dates.size();
+        controller.separateOrder(order);
+        int rowCount = controller.getMenus().size();
 
         for (int i = 0; i < rowCount; i++) {
-           model.addRow(new Object[]{"", "", "", dates.get(i), PaymentMethods.get(i), String.valueOf(payments.get(i))});
+            String menu = (i < controller.getMenus().size()) ? controller.getMenus().get(i) : "";  // 메뉴 데이터 확인
+            String size = (i < controller.getSizes().size()) ? controller.getSizes().get(i) : "";  // 사이즈 데이터 확인
+            int cost = (i < controller.getCosts().size()) ? controller.getCosts().get(i) : 0;  // 가격 데이터 확인
+            String date = (i < dates.size()) ? dates.get(i) : "";  // 날짜 데이터 확인
+            String paymentMethod = (i < PaymentMethods.size()) ? PaymentMethods.get(i) : "";  // 결제 방법 데이터 확인
+            int payment = (i < payments.size()) ? payments.get(i) : 0;  // 결제 금액 데이터 확인
+
+            // 테이블 모델에 행 추가
+            model.addRow(new Object[]{menu, size, cost, date, paymentMethod, payment});
         }
     }
 
