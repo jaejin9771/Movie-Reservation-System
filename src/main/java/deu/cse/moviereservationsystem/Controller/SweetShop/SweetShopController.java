@@ -4,10 +4,20 @@
  */
 package deu.cse.moviereservationsystem.Controller.SweetShop;
 
+import deu.cse.moviereservationsystem.Entity.SweetShopEntity.SweetShop;
+import deu.cse.moviereservationsystem.Repository.CrudRepository;
+import deu.cse.moviereservationsystem.Repository.SweetShopRepository;
+
 /**
  *
  * @author LG
  */
 public class SweetShopController {
-    
+    CrudRepository crud;
+    public SweetShopController(){
+        this.crud = new SweetShopRepository();
+    }
+    public void createSweetShopFile(SweetShop shop){
+        crud.create(shop);
+    }
 }

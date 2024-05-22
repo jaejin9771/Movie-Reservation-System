@@ -98,6 +98,7 @@ deu\cse\moviereservationsystem\view\User\LoginFrame$1.class
 deu\cse\moviereservationsystem\view\Movie\MovieScreeningFrame.class
 deu\cse\moviereservationsystem\view\Payment\MoviePayDetailsFrame.class
 deu\cse\moviereservationsystem\MovieReservationSystem.class
+deu\cse\moviereservationsystem\Controller\SweetShop\SweetShopPayController.class
 deu\cse\moviereservationsystem\view\User\FoundIDFrame.class
 deu\cse\moviereservationsystem\DTO\Movie\MovieDto.class
 deu\cse\moviereservationsystem\Pattern\SweetShopObserver\Displayment.class

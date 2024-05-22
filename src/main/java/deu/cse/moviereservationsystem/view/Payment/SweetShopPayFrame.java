@@ -4,13 +4,11 @@
  */
 package deu.cse.moviereservationsystem.view.Payment;
 
+import deu.cse.moviereservationsystem.Controller.SweetShop.SweetShopController;
 import deu.cse.moviereservationsystem.DTO.SweetShop.ShoppingCartDTO;
 import deu.cse.moviereservationsystem.Entity.SweetShopEntity.SweetShop;
-import deu.cse.moviereservationsystem.Repository.CrudRepository;
-import deu.cse.moviereservationsystem.Repository.SweetShopRepository;
 import deu.cse.moviereservationsystem.view.User.UserMainFrame;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -23,52 +21,61 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
     /**
      * Creates new form SweetShopPayFrame
      */
-    List<ShoppingCartDTO> orderList = new ArrayList<>();
+    SweetShop shop;
+    StringBuilder orderStringBuilder = new StringBuilder();
+    private List<ShoppingCartDTO> dto;
     boolean clickPaymentMethod = false;
-    int totalPrice = 0;
     String clickPayMT;
-    StringBuilder sb = new StringBuilder();
 
-    public SweetShopPayFrame(List<ShoppingCartDTO> orderList) {
-        this.orderList = orderList;
+    public SweetShopPayFrame(List<ShoppingCartDTO> dto) {
+        this.dto = dto;
         initComponents();
         setLocationRelativeTo(null);
+
         setOrderList();
         setTotalCost();
     }
 
+    public String toStringOrderList() {
+        for (ShoppingCartDTO item : this.dto) {
+            orderStringBuilder.append(item).append("\n");
+            System.out.println(item);
+        }
+        return orderStringBuilder.toString();
+    }
+
+    public int caclulatePrice() {
+        int totalPrice = 0;
+        for (ShoppingCartDTO item : this.dto) {
+            totalPrice += ((Number) item.getCost()).intValue();
+        }
+        return totalPrice;
+    }
+    
     private void setOrderList() {
-        orderTextArea.setText( toStringOrder().append("\n").toString());
+        orderTextArea.setText(toStringOrderList().toString());
     }
 
     private void setTotalCost() {
-        for (ShoppingCartDTO item : orderList) {
-            totalPrice += ((Number) item.getCost()).intValue();
-        }
-        inputPaymentPrice.setText(String.valueOf(totalPrice));
+        inputPaymentPrice.setText(String.valueOf(caclulatePrice()));
     }
 
-    private StringBuilder toStringOrder() {
-        for (ShoppingCartDTO item : orderList) {
-            sb.append(item);
-        }
-        return sb;
+    private void sendPayDetailsData() {
+        LocalDate date = LocalDate.now();
+        String dateString = date.toString();
+
+        this.shop = new SweetShop.SweetShopBuilder()
+                .user("이지민") //로그인싱글턴 가져오기
+                .orderList(toStringOrderList().toString())
+                .date(dateString)
+                .PaymentMethod(clickPayMT)
+                .Payment(caclulatePrice())
+                .build();
     }
 
     private void successPay() {
-        LocalDate date = LocalDate.now();
-        String dateString = date.toString();
-        
-        SweetShop shop = new SweetShop.SweetShopBuilder()
-                .user("이지민") //로그인싱글턴 가져오기
-                .orderList(toStringOrder().toString())
-                .date(dateString)
-                .PaymentMethod(clickPayMT)
-                .Payment(totalPrice)
-                .build();
-        
-        CrudRepository mr = new SweetShopRepository();
-        mr.create(shop);
+        SweetShopController controller = new SweetShopController();
+        controller.createSweetShopFile(shop);
     }
 
     /**
@@ -224,29 +231,30 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
-        // TODO add your handling code here:
         UserMainFrame frame = new UserMainFrame();
         frame.setVisible(true);
         dispose();
     }//GEN-LAST:event_previousFrameButtonActionPerformed
 
     private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payButtonActionPerformed
-        // TODO add your handling code here:
         if (clickPaymentMethod) {
-            orderList.clear();
+            dto.clear();
+            sendPayDetailsData();
             successPay();
+
+            UserMainFrame frame = new UserMainFrame();
+            frame.setVisible(true);
+            dispose();
         } else
             JOptionPane.showMessageDialog(null, "결제수단을 선택해주세요.");
     }//GEN-LAST:event_payButtonActionPerformed
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashButtonActionPerformed
-        // TODO add your handling code here:
         clickPayMT = "현금";
         clickPaymentMethod = true;
     }//GEN-LAST:event_cashButtonActionPerformed
 
     private void cardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cardButtonActionPerformed
-        // TODO add your handling code here:
         clickPayMT = "카드";
         clickPaymentMethod = true;
     }//GEN-LAST:event_cardButtonActionPerformed
