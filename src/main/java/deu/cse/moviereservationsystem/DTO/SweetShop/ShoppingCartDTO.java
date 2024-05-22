@@ -10,7 +10,7 @@ package deu.cse.moviereservationsystem.DTO.SweetShop;
  */
 public class ShoppingCartDTO {
 
-     private String menu;
+    private String menu;
     private String size;
     private int cost;
 
@@ -25,7 +25,6 @@ public class ShoppingCartDTO {
         private String menu;
         private String size;
         private int cost;
-
 
         public ShoppingCartBuilder menu(String menu) {
             this.menu = menu;
@@ -48,12 +47,20 @@ public class ShoppingCartDTO {
     }
 
     public String toString() {
-        return menu + '\'' +
-               " " + size + '\'' +
-               " " + cost + '\''+" " ;
+        return "[ 메뉴 : " + menu + " ]"
+                + "  [사이즈 :  " + size + " ]"
+                + "  [가격 : " + cost + " ]";
     }
-    
+
     public int getCost() {
-            return cost;
-        }
+        return cost;
+    }
+
+    public String getMenu() {
+        return menu;
+    }
+
+    public String getSize() {
+        return size;
+    }
 }

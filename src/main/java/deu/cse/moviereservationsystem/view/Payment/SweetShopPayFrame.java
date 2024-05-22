@@ -16,14 +16,15 @@ import javax.swing.JOptionPane;
  *
  * @author LG
  */
-public class SweetShopPayFrame extends javax.swing.JFrame {
+public final class SweetShopPayFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form SweetShopPayFrame
      */
-    SweetShop shop;
+    int totalPrice = 0;
     StringBuilder orderStringBuilder = new StringBuilder();
     private List<ShoppingCartDTO> dto;
+    private SweetShop shop;
     boolean clickPaymentMethod = false;
     String clickPayMT;
 
@@ -32,48 +33,52 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        setOrderList();
+        setTextArea();
         setTotalCost();
     }
 
-    public String toStringOrderList() {
+    public void setTextArea() {
         for (ShoppingCartDTO item : this.dto) {
             orderStringBuilder.append(item).append("\n");
-            System.out.println(item);
         }
-        return orderStringBuilder.toString();
+        orderTextArea.setText(orderStringBuilder.toString());
     }
 
     public int caclulatePrice() {
-        int totalPrice = 0;
         for (ShoppingCartDTO item : this.dto) {
             totalPrice += ((Number) item.getCost()).intValue();
         }
         return totalPrice;
     }
-    
-    private void setOrderList() {
-        orderTextArea.setText(toStringOrderList().toString());
-    }
 
     private void setTotalCost() {
-        inputPaymentPrice.setText(String.valueOf(caclulatePrice()));
+        inputTotalCost.setText(String.valueOf(caclulatePrice()));
     }
 
-    private void sendPayDetailsData() {
+    public String getCombinedArray() { //List<ShoppingCartDTO> dto를 주문내역별 String 배열로 변환하고 String으로 반환
+        String[] combinedArray = new String[dto.size()];
+        for (int i = 0; i < dto.size(); i++) {
+            ShoppingCartDTO item = dto.get(i);
+            combinedArray[i] = item.getMenu() + "|" + item.getSize() + "|" + item.getCost();
+        }
+        String combinedOrderList = String.join(";", combinedArray);
+        return combinedOrderList;
+    }
+
+    private void sendPayDetailsData() { //엔티티 SweetShop에 값을 입력한다.
         LocalDate date = LocalDate.now();
         String dateString = date.toString();
 
         this.shop = new SweetShop.SweetShopBuilder()
                 .user("이지민") //로그인싱글턴 가져오기
-                .orderList(toStringOrderList().toString())
+                .orderList(getCombinedArray())
                 .date(dateString)
                 .PaymentMethod(clickPayMT)
                 .Payment(caclulatePrice())
                 .build();
     }
 
-    private void successPay() {
+    private void successPay() { //entity에 입력한 값들을 파일로 업데이트한다.
         SweetShopController controller = new SweetShopController();
         controller.createSweetShopFile(shop);
     }
@@ -92,7 +97,7 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        inputPaymentPrice = new javax.swing.JTextField();
+        inputTotalCost = new javax.swing.JTextField();
         cashButton = new javax.swing.JButton();
         cardButton = new javax.swing.JButton();
         payButton = new javax.swing.JButton();
@@ -140,8 +145,8 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         jLabel2.setText("결제가격 :");
 
-        inputPaymentPrice.setEditable(false);
-        inputPaymentPrice.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        inputTotalCost.setEditable(false);
+        inputTotalCost.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
 
         cashButton.setBackground(new java.awt.Color(229, 229, 229));
         cashButton.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
@@ -189,21 +194,22 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(236, 236, 236))
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addContainerGap(36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cashButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(payButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputPaymentPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(payButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cashButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(inputTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,15 +222,15 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(inputPaymentPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cashButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cardButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(payButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -238,9 +244,9 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
 
     private void payButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payButtonActionPerformed
         if (clickPaymentMethod) {
-            dto.clear();
             sendPayDetailsData();
             successPay();
+            dto.clear();
 
             UserMainFrame frame = new UserMainFrame();
             frame.setVisible(true);
@@ -262,7 +268,7 @@ public class SweetShopPayFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cardButton;
     private javax.swing.JButton cashButton;
-    private javax.swing.JTextField inputPaymentPrice;
+    private javax.swing.JTextField inputTotalCost;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
