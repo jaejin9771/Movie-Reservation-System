@@ -48,9 +48,9 @@ public class ShoppingCartDTO {
     }
 
     public String toString() {
-        return "메뉴 = '" + menu + '\'' +
-               "사이즈 = '" + size + '\'' +
-               "가격 = '" + cost ;
+        return menu + '\'' +
+               " " + size + '\'' +
+               " " + cost + '\''+" " ;
     }
     
     public int getCost() {

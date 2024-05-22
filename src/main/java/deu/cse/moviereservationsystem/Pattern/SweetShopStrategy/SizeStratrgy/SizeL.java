@@ -9,7 +9,7 @@ package deu.cse.moviereservationsystem.Pattern.SweetShopStrategy.SizeStratrgy;
  * @author LG
  */
 public class SizeL implements SizeChoice{
-    String size = "size: L";
+    String size = "L";
     @Override
     public String getSize() {
         return size;
