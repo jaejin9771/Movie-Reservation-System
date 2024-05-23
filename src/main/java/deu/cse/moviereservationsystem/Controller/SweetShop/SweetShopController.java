@@ -17,6 +17,13 @@ import java.util.List;
 public class SweetShopController {
 
     CrudRepository crud;
+    List<String> menus = new ArrayList<>();
+    List<String> sizes = new ArrayList<>();
+    List<Integer> costs = new ArrayList<>();
+    List<String> dates = new ArrayList<>();
+    List<Integer> payments = new ArrayList<>();
+    List<String> paymentMethods = new ArrayList<>();
+    List<Integer> countOrder = new ArrayList<>();
 
     public SweetShopController() {
         this.crud = new SweetShopRepository();
@@ -27,9 +34,8 @@ public class SweetShopController {
     }
 
     public List<SweetShop> pickOrder(String user) {//각 유저별 주문내역을 출력한다.
-        /*txt 파일에서 가져온 모든 데이터와 입력받은 user값을 비교하여 같으면 ArrayList로 불러온다.*/
         List<SweetShop> userOrder = new ArrayList<>();
-        for (Object items : crud.readAll()) { // crud.readAll()이 리스트를 반환한다고 가정
+        for (Object items : crud.readAll()) {
             SweetShop item = (SweetShop) items;
             if (item.getUser().equals(user)) {
                 userOrder.add(item);
@@ -38,7 +44,7 @@ public class SweetShopController {
         return userOrder;
     }
 
-public List<String> getDate(List<SweetShop> list) {
+    public List<String> getDate(List<SweetShop> list) {
         List<String> st = new ArrayList<>();
         for (SweetShop l : list) {
             st.add(l.getDate());
@@ -61,38 +67,80 @@ public List<String> getDate(List<SweetShop> list) {
         }
         return st;
     }
-    
-    // 메뉴, 사이즈, 가격을 저장할 리스트 생성
-    List<String> menus = new ArrayList<>();
-    List<String> sizes = new ArrayList<>();
-    List<Integer> costs = new ArrayList<>();
 
     public void separateOrder(List<SweetShop> list) {
-        // SweetShop 객체 리스트에서 orderList 문자열을 추출하여 저장할 리스트 생성
+
         List<String> st = new ArrayList<>();
-        // 각 orderList 문자열을 ';'로 분리하여 처리
         for (SweetShop l : list) {
             st.add(l.getOrderList());
         }
+
         for (String s : st) {
             String[] items = s.split(";");
             for (String i : items) {
-                // 각 아이템을 '|'로 분리하여 메뉴, 사이즈, 가격을 추출
                 String[] parts = i.split("\\|");
-                // 메뉴, 사이즈, 가격이 모두 있는 경우
                 if (parts.length == 3) {
                     menus.add(parts[0]);
                     sizes.add(parts[1]);
-                    costs.add(Integer.parseInt(parts[2]));
+                    costs.add(Integer.valueOf(parts[2]));
                 }
-                /*else if (parts.length == 2) {
-                    // 가격 정보가 없는 경우
-                    menus.add(parts[0]);
-                    sizes.add(parts[1]);
-                    costs.add(0); // 가격 정보가 없는 경우 0으로 설정
-                }*/
+            }
+            countOrder(items);
+        }
+    }
+
+    private void countOrder(String[] items) {
+        boolean isFirstItem = true;
+        for (int j = 0; j < items.length; j++) {
+            if (isFirstItem) {
+                countOrder.add(1); // First item in the order
+                isFirstItem = false;
+            } else {
+                countOrder.add(0); // Subsequent items in the order
             }
         }
+    }
+
+    public void distributeOrder(String user) {
+        List<SweetShop> orderList = pickOrder(user);
+        separateOrder(orderList);
+        
+        int rowCount = getCountOrder().size();
+        int currentIndex = 0;
+        
+        List<String> dates = getDate(orderList);
+        List<Integer> payments = getPayment(orderList);
+        List<String> paymentMethods = getPaymentMethod(orderList);
+
+        String previousDate = "";
+        int previousPayment = 0;
+        String previousPaymentMethod = "";
+
+        for (int i = 0; i < rowCount; i++) {
+            if (countOrder.get(i) == 1) {
+                // getCountOrder() 값이 1일 때, 현재 인덱스의 값을 출력하고 다음 값으로 이동합니다.
+                this.dates.add(dates.get(currentIndex));
+                this.payments.add(payments.get(currentIndex));
+                this.paymentMethods.add(paymentMethods.get(currentIndex));
+                currentIndex++;
+            } else {
+                // getCountOrder() 값이 0일 때, 이전에 출력된 값을 유지하고 출력합니다.
+                this.dates.add(previousDate);
+                this.payments.add(previousPayment);
+                this.paymentMethods.add(previousPaymentMethod);
+            }
+
+            // 이전에 출력된 값을 저장합니다.
+            if (currentIndex > 0) {
+                previousDate = dates.get(currentIndex - 1);
+                previousPayment = payments.get(currentIndex - 1);
+                previousPaymentMethod = paymentMethods.get(currentIndex - 1);
+            }
+        }
+    }
+
+    public List<Integer> getCountOrder() {
+        return countOrder;
     }
 
     public List<String> getMenus() {
@@ -107,4 +155,15 @@ public List<String> getDate(List<SweetShop> list) {
         return costs;
     }
 
+    public List<String> getDates() {
+        return dates;
+    }
+
+    public List<Integer> getPayments() {
+        return payments;
+    }
+
+    public List<String> getPaymentMethods() {
+        return paymentMethods;
+    }
 }

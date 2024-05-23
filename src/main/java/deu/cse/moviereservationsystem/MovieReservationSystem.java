@@ -4,6 +4,7 @@
 
 package deu.cse.moviereservationsystem;
 
+import deu.cse.moviereservationsystem.Controller.SweetShop.SweetShopController;
 import deu.cse.moviereservationsystem.view.MainFrame;
 
 /**
