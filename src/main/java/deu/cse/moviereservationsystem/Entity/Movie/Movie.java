@@ -16,24 +16,24 @@ public class Movie {
     protected String genre;
     protected String director;
     protected int duration;
-
+    
     public Movie() {
     }
-
+    
     public Movie(Builder builder) {
         this.title = builder.title;
         this.director = builder.director;
         this.duration = builder.duration;
         this.genre = builder.genre;
     }
-
+    
     public Movie(String title, String genre, String director, int duration) {
         this.title = title;
         this.genre = genre;
         this.director = director;
         this.duration = duration;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         // 같은 참조인지 확인
@@ -98,27 +98,27 @@ public class Movie {
         private String genre;
         private String director;
         private int duration;
-
+        
         public Builder title(String title) {
             this.title = title;
             return this;
         }
-
+        
         public Builder director(String director) {
             this.director = director;
             return this;
         }
-
+        
         public Builder duration(int duration) {
             this.duration = duration;
             return this;
         }
-
+        
         public Builder genre(String genre) {
             this.genre = genre;
             return this;
         }
-
+        
         public Movie build() {
             return new Movie(this);
         }
