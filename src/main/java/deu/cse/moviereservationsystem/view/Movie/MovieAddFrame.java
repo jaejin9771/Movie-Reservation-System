@@ -4,7 +4,7 @@
  */
 package deu.cse.moviereservationsystem.view.Movie;
 
-import deu.cse.moviereservationsystem.Controller.Movie.MovieController;
+import deu.cse.moviereservationsystem.Controller.MovieController;
 import deu.cse.moviereservationsystem.Entity.Movie.Movie;
 import java.util.Objects;
 import javax.swing.JOptionPane;
