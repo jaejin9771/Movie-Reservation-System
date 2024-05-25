@@ -5,10 +5,12 @@
 package deu.cse.moviereservationsystem.Controller.SweetShop;
 
 import deu.cse.moviereservationsystem.Entity.SweetShopEntity.SweetShop;
+import deu.cse.moviereservationsystem.Entity.SweetShopEntity.SweetShopPayment;
 import deu.cse.moviereservationsystem.Repository.CrudRepository;
 import deu.cse.moviereservationsystem.Repository.SweetShopRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  *
@@ -21,7 +23,7 @@ public class SweetShopController {
     List<String> sizes = new ArrayList<>();
     List<Integer> costs = new ArrayList<>();
     List<String> dates = new ArrayList<>();
-    List<Integer> payments = new ArrayList<>();
+    List<String> payments = new ArrayList<>();
     List<String> paymentMethods = new ArrayList<>();
     List<Integer> countOrder = new ArrayList<>();
 
@@ -43,33 +45,33 @@ public class SweetShopController {
         }
         return userOrder;
     }
+// -----------------------------------------------------------------------------------
 
-    public List<String> getDate(List<SweetShop> list) {
-        List<String> st = new ArrayList<>();
+    public <T> List<T> getList(List<SweetShop> list, Function<SweetShop, T> mapper) {
+        //Function<T, R>은 제네릭 인터페이스로, 'T' 타입의 입력을 받아 R타입의 출력을 반환
+        //'apply' 메서드는 입력 값을 받아 반환
+        List<T> result = new ArrayList<>();
         for (SweetShop l : list) {
-            st.add(l.getDate());
+            result.add(mapper.apply(l));
         }
-        return st;
+        return result;
     }
 
-    public List<Integer> getPayment(List<SweetShop> list) {
-        List<Integer> st = new ArrayList<>();
-        for (SweetShop l : list) {
-            st.add(l.getPayment());
-        }
-        return st;
+    public List<String> getDate(List<SweetShop> list) {
+        return getList(list, SweetShop -> SweetShop.getDate());
+    }
+
+    public List<String> getPayment(List<SweetShop> list) {
+        return getList(list, SweetShop -> String.valueOf(SweetShop.getPayment()));
     }
 
     public List<String> getPaymentMethod(List<SweetShop> list) {
-        List<String> st = new ArrayList<>();
-        for (SweetShop l : list) {
-            st.add(l.getPaymentMethod());
-        }
-        return st;
+        return getList(list, SweetShop -> SweetShop.getPaymentMethod());
     }
+// -----------------------------------------------------------------------------------
 
     public void separateOrder(List<SweetShop> list) {
-
+        //하나의 문자열로 결합된 주문내역을 menu, size,cost 별로 나눈다.
         List<String> st = new ArrayList<>();
         for (SweetShop l : list) {
             st.add(l.getOrderList());
@@ -90,6 +92,7 @@ public class SweetShopController {
     }
 
     private void countOrder(String[] items) {
+        //주문내역에서 첫번째로 담긴 메뉴일 경우 1을 넣어주고 아닌 경우엔 0을 넣는다.
         boolean isFirstItem = true;
         for (int j = 0; j < items.length; j++) {
             if (isFirstItem) {
@@ -102,21 +105,18 @@ public class SweetShopController {
     }
 
     public void distributeOrder(String user) {
-        List<SweetShop> orderList = pickOrder(user);
+        //countOrder(String[] items)메서드에서 카운트한 변수를 이용하여 
+        //date, payment, paymentMethod의 인덱스길이를 menu, size, cost만큼 늘린다.
+        List<SweetShop> orderList = pickOrder(user); //데이터파일에서 user가 주문한 내역을 List로 불러온다.
         separateOrder(orderList);
-        
-        int rowCount = getCountOrder().size();
+
         int currentIndex = 0;
-        
-        List<String> dates = getDate(orderList);
-        List<Integer> payments = getPayment(orderList);
-        List<String> paymentMethods = getPaymentMethod(orderList);
 
-        String previousDate = "";
-        int previousPayment = 0;
-        String previousPaymentMethod = "";
+        List<String> dates = getDate(orderList);//user가 주문한 내역의 날짜를 불러온다.
+        List<String> payments = getPayment(orderList);//user가 주문한 내역의 총 가격을 불러온다.
+        List<String> paymentMethods = getPaymentMethod(orderList);//user가 주문한 내역의 결제수단을 불러온다.
 
-        for (int i = 0; i < rowCount; i++) {
+        for (int i = 0; i < getCountOrder().size(); i++) {
             if (countOrder.get(i) == 1) {
                 // getCountOrder() 값이 1일 때, 현재 인덱스의 값을 출력하고 다음 값으로 이동합니다.
                 this.dates.add(dates.get(currentIndex));
@@ -125,45 +125,19 @@ public class SweetShopController {
                 currentIndex++;
             } else {
                 // getCountOrder() 값이 0일 때, 이전에 출력된 값을 유지하고 출력합니다.
-                this.dates.add(previousDate);
-                this.payments.add(previousPayment);
-                this.paymentMethods.add(previousPaymentMethod);
-            }
-
-            // 이전에 출력된 값을 저장합니다.
-            if (currentIndex > 0) {
-                previousDate = dates.get(currentIndex - 1);
-                previousPayment = payments.get(currentIndex - 1);
-                previousPaymentMethod = paymentMethods.get(currentIndex - 1);
+                this.dates.add(" ");
+                this.payments.add(" ");
+                this.paymentMethods.add(" ");
             }
         }
     }
 
+    public SweetShopPayment updatePayEntity() {
+        SweetShopPayment payEntity = new SweetShopPayment(this.menus, this.sizes, this.costs, this.dates, this.payments, this.paymentMethods);
+        return payEntity;
+    }
+
     public List<Integer> getCountOrder() {
         return countOrder;
-    }
-
-    public List<String> getMenus() {
-        return menus;
-    }
-
-    public List<String> getSizes() {
-        return sizes;
-    }
-
-    public List<Integer> getCosts() {
-        return costs;
-    }
-
-    public List<String> getDates() {
-        return dates;
-    }
-
-    public List<Integer> getPayments() {
-        return payments;
-    }
-
-    public List<String> getPaymentMethods() {
-        return paymentMethods;
     }
 }

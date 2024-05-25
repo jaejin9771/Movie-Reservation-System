@@ -6,6 +6,7 @@ package deu.cse.moviereservationsystem.view.Payment;
 
 import deu.cse.moviereservationsystem.Controller.SweetShop.SweetShopController;
 import deu.cse.moviereservationsystem.Entity.SweetShopEntity.SweetShop;
+import deu.cse.moviereservationsystem.Entity.SweetShopEntity.SweetShopPayment;
 import deu.cse.moviereservationsystem.view.User.UserMainFrame;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -32,22 +33,16 @@ public class SweetShopPayDetailsFrame extends javax.swing.JFrame {
 
     private void setTable() {
         controller.distributeOrder("이지민");
-        List<String> menus = controller.getMenus();
-        List<String> sizes = controller.getSizes();
-        List<Integer> costs = controller.getCosts();
-        List<String> dates = controller.getDates();
-        List<Integer> payments = controller.getPayments();
-        List<String> paymentMethods = controller.getPaymentMethods();
+        SweetShopPayment payEntity = controller.updatePayEntity();
         
         for (int i = 0; i < controller.getCountOrder().size(); i++) {
-            String date = dates.get(i);
-            int payment = payments.get(i);
-            String paymentMethod = paymentMethods.get(i);
+            String date = payEntity.getDates().get(i);
+            String payment = payEntity.getPayments().get(i);
+            String paymentMethod = payEntity.getPaymentMethods().get(i);
             
-            String menu = menus.get(i);
-            String size = sizes.get(i);
-            int cost = costs.get(i);
-           
+            String menu = payEntity.getMenus().get(i);
+            String size = payEntity.getSizes().get(i);
+            int cost = payEntity.getCosts().get(i);
             // 테이블 모델에 행 추가
             model.addRow(new Object[]{menu, size, cost, date, paymentMethod, payment});
         }
