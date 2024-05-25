@@ -21,7 +21,6 @@ public final class SweetShopPayFrame extends javax.swing.JFrame {
     /**
      * Creates new form SweetShopPayFrame
      */
-    int totalPrice = 0;
     StringBuilder orderStringBuilder = new StringBuilder();
     private List<ShoppingCartDTO> dto;
     private SweetShop shop;
@@ -44,15 +43,13 @@ public final class SweetShopPayFrame extends javax.swing.JFrame {
         orderTextArea.setText(orderStringBuilder.toString());
     }
 
-    public int caclulatePrice() {
+    public int setTotalCost() {
+        int totalPrice = 0;
         for (ShoppingCartDTO item : this.dto) {
             totalPrice += ((Number) item.getCost()).intValue();
         }
+        inputTotalCost.setText(String.valueOf(totalPrice));
         return totalPrice;
-    }
-
-    private void setTotalCost() {
-        inputTotalCost.setText(String.valueOf(caclulatePrice()));
     }
 
     public String getCombinedArray() { //List<ShoppingCartDTO> dto를 주문내역별 String 배열로 변환하고 String으로 반환
@@ -74,7 +71,7 @@ public final class SweetShopPayFrame extends javax.swing.JFrame {
                 .orderList(getCombinedArray())
                 .date(dateString)
                 .PaymentMethod(clickPayMT)
-                .Payment(caclulatePrice())
+                .Payment(setTotalCost())
                 .build();
     }
 
