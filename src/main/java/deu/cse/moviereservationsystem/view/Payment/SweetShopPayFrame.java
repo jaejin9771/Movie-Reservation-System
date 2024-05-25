@@ -80,6 +80,20 @@ public final class SweetShopPayFrame extends javax.swing.JFrame {
         controller.createSweetShopFile(shop);
     }
 
+    private void confirmMessage() {
+        int response = JOptionPane.showConfirmDialog(this, "영수증을 출력하시겠습니까?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.YES_OPTION) {
+            ReceiptFrame receipt = new ReceiptFrame(shop);
+            receipt.setVisible(true);
+            dispose();
+        }
+        else if(response == JOptionPane.NO_OPTION){
+            UserMainFrame frame = new UserMainFrame();
+            frame.setVisible(true);
+            dispose();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -244,10 +258,7 @@ public final class SweetShopPayFrame extends javax.swing.JFrame {
             sendPayDetailsData();
             successPay();
             dto.clear();
-
-            UserMainFrame frame = new UserMainFrame();
-            frame.setVisible(true);
-            dispose();
+            confirmMessage();
         } else
             JOptionPane.showMessageDialog(null, "결제수단을 선택해주세요.");
     }//GEN-LAST:event_payButtonActionPerformed
