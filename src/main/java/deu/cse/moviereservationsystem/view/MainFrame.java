@@ -5,6 +5,7 @@
 package deu.cse.moviereservationsystem.view;
 
 import deu.cse.moviereservationsystem.view.User.LoginFrame;
+import deu.cse.moviereservationsystem.view.User.RegisterFrame;
 import javax.swing.JFrame;
 
 /**
@@ -68,6 +69,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         registerFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         registerFrameButton.setText("회원가입");
+        registerFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerFrameButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 1, 24)); // NOI18N
         jLabel1.setText("Movie Reservation System");
@@ -111,6 +117,13 @@ public class MainFrame extends javax.swing.JFrame {
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_loginFrameButtonActionPerformed
+
+    private void registerFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerFrameButtonActionPerformed
+        // TODO add your handling code here:
+        RegisterFrame register = new RegisterFrame();
+        register.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_registerFrameButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
