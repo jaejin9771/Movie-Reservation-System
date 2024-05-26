@@ -4,8 +4,11 @@
  */
 package deu.cse.moviereservationsystem.view.User;
 
+import deu.cse.moviereservationsystem.Controller.UserController;
+import deu.cse.moviereservationsystem.Entity.User.User;
 import deu.cse.moviereservationsystem.view.MainFrame;
 import java.awt.Color;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -14,7 +17,7 @@ import javax.swing.UIManager;
  * @author LG
  */
 public class LoginFrame extends javax.swing.JFrame {
-
+    UserController userController = UserController.getInstance();
     /**
      * Creates new form LoginFrame
      */
@@ -37,8 +40,8 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        inputID = new javax.swing.JTextField();
-        inputPW = new javax.swing.JTextField();
+        inputId = new javax.swing.JTextField();
+        inputPw = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         foundIDFrameButton = new javax.swing.JButton();
         foundPWFrameButton = new javax.swing.JButton();
@@ -83,9 +86,9 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("맑은 고딕", 0, 20)); // NOI18N
         jLabel3.setText("PW :");
 
-        inputID.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        inputId.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
 
-        inputPW.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        inputPw.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
 
         loginButton.setBackground(new java.awt.Color(204, 204, 204));
         loginButton.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
@@ -124,8 +127,8 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inputID)
-                    .addComponent(inputPW, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                    .addComponent(inputId)
+                    .addComponent(inputPw, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
                 .addContainerGap(83, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -143,11 +146,11 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(inputID, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputId, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(inputPW, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputPw, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,9 +171,24 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_previousFrameButtonActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        String id = inputId.getText();
+        String pw = inputPw.getText();
+        
+        if("".equals(id) || "".equals(pw)) {
+            JOptionPane.showMessageDialog(null, "빈 칸 없이 입력해주세요.");
+            return; 
+        }
+        
+        User user = userController.Login(id, pw);
+        
+        if(Objects.isNull(user)){
+            JOptionPane.showMessageDialog(null, "로그인 정보가 맞지 않습니다.");
+            return;
+        }
+        
         //만약 입력된 회원정보가 맞다면
-        UserMainFrame user = new UserMainFrame();
-        user.setVisible(true);
+        UserMainFrame userFrame = new UserMainFrame();
+        userFrame.setVisible(true);
         dispose();
         //아니라면
         //JOptionPane.showMessageDialog(null, "로그인 정보가 맞지 않습니다.");
@@ -194,8 +212,8 @@ public class LoginFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton foundIDFrameButton;
     private javax.swing.JButton foundPWFrameButton;
-    private javax.swing.JTextField inputID;
-    private javax.swing.JTextField inputPW;
+    private javax.swing.JTextField inputId;
+    private javax.swing.JTextField inputPw;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
