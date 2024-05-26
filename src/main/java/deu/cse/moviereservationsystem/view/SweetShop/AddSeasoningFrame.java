@@ -24,7 +24,6 @@ public class AddSeasoningFrame extends javax.swing.JFrame {
     InputImage input = new InputImage();
     Items item;
     boolean clickSize = false; //사이즈 클릭 감지
-    boolean clickOption = false; //옵션 클릭 감지
 
     private String menu;
     private String size;
@@ -280,19 +279,16 @@ public class AddSeasoningFrame extends javax.swing.JFrame {
     private void CheeseSeasoningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheeseSeasoningButtonActionPerformed
         // TODO add your handling code here:
         this.item = new CheeseSeasoning(item);
-        clickOption = true;
     }//GEN-LAST:event_CheeseSeasoningButtonActionPerformed
 
     private void ChiliSeasoningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChiliSeasoningButtonActionPerformed
         // TODO add your handling code here:
         this.item = new ChiliSeasoning(item);
-        clickOption = true;
     }//GEN-LAST:event_ChiliSeasoningButtonActionPerformed
 
     private void GarlicSeasoningButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GarlicSeasoningButtonActionPerformed
         // TODO add your handling code here:
         this.item = new GarlicSeasoning(item);
-        clickOption = true;
     }//GEN-LAST:event_GarlicSeasoningButtonActionPerformed
 
     private void SizeS_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeS_ButtonActionPerformed

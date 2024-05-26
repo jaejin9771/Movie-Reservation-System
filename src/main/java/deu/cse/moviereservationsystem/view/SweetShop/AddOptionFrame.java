@@ -24,7 +24,6 @@ public class AddOptionFrame extends javax.swing.JFrame {
     InputImage input = new InputImage();
     Items item;
     boolean clickSize = false; //사이즈 클릭 감지
-    boolean clickOption = false; //옵션 클릭 감지
 
     private String menu;
     private String size;
@@ -253,7 +252,7 @@ public class AddOptionFrame extends javax.swing.JFrame {
         if (clickSize) {
             OrderList order = OrderList.getInstance();
             order.receiveOrderList(menu, size, cost);
-            
+
             BeverageFrame beverage = BeverageFrame.getInstance();
             beverage.setVisible(true);
             dispose();
@@ -273,7 +272,6 @@ public class AddOptionFrame extends javax.swing.JFrame {
         item = new IceOption(item);
         menu = item.getDescription();
         cost = item.cost();
-        clickOption = true;
     }//GEN-LAST:event_IceOptionButtonActionPerformed
 
     private void noIceOptionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noIceOptionButtonActionPerformed
@@ -281,37 +279,36 @@ public class AddOptionFrame extends javax.swing.JFrame {
         item = new NoIceOption(item);
         menu = item.getDescription();
         cost = item.cost();
-        clickOption = true;
     }//GEN-LAST:event_noIceOptionButtonActionPerformed
 
     private void SizeS_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeS_buttonActionPerformed
         // TODO add your handling code here:
-        if (!clickSize && clickOption) {
+        if (!clickSize) {
             size = s.getSize();
             cost += s.getCost();
             clickSize = true;
         } else
-            JOptionPane.showMessageDialog(null, "옵션을 선택해주세요.");
+            JOptionPane.showMessageDialog(null, "이미 선택하신 사이즈는 " + size + "입니다.", "정보", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_SizeS_buttonActionPerformed
 
     private void SizeM_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeM_buttonActionPerformed
         // TODO add your handling code here:
-        if (!clickSize && clickOption) {
+        if (!clickSize) {
             size = m.getSize();
             cost += m.getCost();
             clickSize = true;
         } else
-           JOptionPane.showMessageDialog(null, "옵션을 선택해주세요.");
+            JOptionPane.showMessageDialog(null, "이미 선택하신 사이즈는 " + size + "입니다.", "정보", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_SizeM_buttonActionPerformed
 
     private void SizeL_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeL_buttonActionPerformed
         // TODO add your handling code here:
-        if (!clickSize && clickOption) {
+        if (!clickSize) {
             size = l.getSize();
             cost += l.getCost();
             clickSize = true;
         } else
-            JOptionPane.showMessageDialog(null, "옵션을 선택해주세요.");
+            JOptionPane.showMessageDialog(null, "이미 선택하신 사이즈는 " + size + "입니다.", "정보", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_SizeL_buttonActionPerformed
 
 

@@ -77,7 +77,7 @@ public class ReceiptFrame extends javax.swing.JFrame {
         });
 
         receiptTextArea.setColumns(20);
-        receiptTextArea.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
+        receiptTextArea.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
         receiptTextArea.setRows(5);
         jScrollPane1.setViewportView(receiptTextArea);
 
