@@ -2,52 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package deu.cse.moviereservationsystem.view.Payment;
-
-import deu.cse.moviereservationsystem.Controller.SweetShop.SweetShopController;
-import deu.cse.moviereservationsystem.Controller.UserController;
-import deu.cse.moviereservationsystem.Entity.SweetShopEntity.SweetShop;
-import deu.cse.moviereservationsystem.Entity.SweetShopEntity.SweetShopPayment;
-import deu.cse.moviereservationsystem.view.User.UserMainFrame;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
+package deu.cse.moviereservationsystem.view.Manager;
 
 /**
  *
  * @author LG
  */
-public class SweetShopPayDetailsFrame extends javax.swing.JFrame {
+public class MovieStatsFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form SweetShopPayDetailsFrame
+     * Creates new form MovieStatsFrame
      */
-    UserController user = UserController.getInstance();
-    SweetShopController controller = new SweetShopController();
-    List<SweetShop> order = controller.pickOrder("이지민");
-    DefaultTableModel model; //JTable 객체
-
-    public SweetShopPayDetailsFrame() {
+    public MovieStatsFrame() {
         initComponents();
-        setLocationRelativeTo(null);
-        model = (DefaultTableModel) payDetailsTable.getModel();
-        setTable();
-    }
-
-    private void setTable() {
-        controller.distributeOrder(user.getId());
-        SweetShopPayment payEntity = controller.updatePayEntity();
-        
-        for (int i = 0; i < controller.getCountOrder().size(); i++) {
-            String date = payEntity.getDates().get(i);
-            String payment = payEntity.getPayments().get(i);
-            String paymentMethod = payEntity.getPaymentMethods().get(i);
-            
-            String menu = payEntity.getMenus().get(i);
-            String size = payEntity.getSizes().get(i);
-            int cost = payEntity.getCosts().get(i);
-            // 테이블 모델에 행 추가
-            model.addRow(new Object[]{menu, size, cost, date, paymentMethod, payment});
-        }
     }
 
     /**
@@ -63,8 +30,8 @@ public class SweetShopPayDetailsFrame extends javax.swing.JFrame {
         previousFrameButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        payDetailsTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jTable1 = new javax.swing.JTable();
+        checkButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,7 +46,7 @@ public class SweetShopPayDetailsFrame extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
-        jLabel1.setText("스위트샵 주문내역 확인");
+        jLabel1.setText("영화 예매 통계");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -88,8 +55,8 @@ public class SweetShopPayDetailsFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 610, Short.MAX_VALUE)
-                .addComponent(previousFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
+                .addComponent(previousFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,30 +67,23 @@ public class SweetShopPayDetailsFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1)))
         );
 
-        payDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "메뉴", "사이즈", "가격", "주문날짜", "결제수단", "총결제가격"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
-            };
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        payDetailsTable.setToolTipText("");
-        jScrollPane1.setViewportView(payDetailsTable);
-
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setText("확인");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        checkButton.setText("확인");
+        checkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                checkButtonActionPerformed(evt);
             }
         });
 
@@ -138,17 +98,17 @@ public class SweetShopPayDetailsFrame extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -157,25 +117,24 @@ public class SweetShopPayDetailsFrame extends javax.swing.JFrame {
 
     private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
         // TODO add your handling code here:
-        PaymentFrame pay = new PaymentFrame();
-        pay.setVisible(true);
+        ManagerMainFrame m = new ManagerMainFrame();
+        m.setVisible(true);
         dispose();
     }//GEN-LAST:event_previousFrameButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void checkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkButtonActionPerformed
         // TODO add your handling code here:
-        UserMainFrame frame = new UserMainFrame();
-        frame.setVisible(true);
+        ManagerMainFrame m = new ManagerMainFrame();
+        m.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }//GEN-LAST:event_checkButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton checkButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable payDetailsTable;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton previousFrameButton;
     // End of variables declaration//GEN-END:variables
 }

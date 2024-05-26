@@ -5,6 +5,7 @@
 package deu.cse.moviereservationsystem.view.Payment;
 
 import deu.cse.moviereservationsystem.Controller.SweetShop.SweetShopController;
+import deu.cse.moviereservationsystem.Controller.UserController;
 import deu.cse.moviereservationsystem.DTO.SweetShop.ShoppingCartDTO;
 import deu.cse.moviereservationsystem.Entity.SweetShopEntity.SweetShop;
 import deu.cse.moviereservationsystem.view.User.UserMainFrame;
@@ -22,6 +23,7 @@ public final class SweetShopPayFrame extends javax.swing.JFrame {
      * Creates new form SweetShopPayFrame
      */
     StringBuilder orderStringBuilder = new StringBuilder();
+    UserController user = UserController.getInstance();
     private List<ShoppingCartDTO> dto;
     private SweetShop shop;
     boolean clickPaymentMethod = false;
@@ -67,7 +69,7 @@ public final class SweetShopPayFrame extends javax.swing.JFrame {
         String dateString = date.toString();
 
         this.shop = new SweetShop.SweetShopBuilder()
-                .user("이지민") //로그인싱글턴 가져오기
+                .user(user.getId()) //로그인싱글턴 가져오기
                 .orderList(getCombinedArray())
                 .date(dateString)
                 .PaymentMethod(clickPayMT)
