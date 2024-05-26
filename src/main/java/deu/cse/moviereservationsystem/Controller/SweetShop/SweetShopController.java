@@ -35,7 +35,7 @@ public class SweetShopController {
         crud.create(shop);
     }
 
-    public List<SweetShop> pickOrder(String user) {//각 유저별 주문내역을 출력한다.
+    public List<SweetShop> readUserOrder(String user) {//각 유저별 주문내역을 출력한다.
         List<SweetShop> userOrder = new ArrayList<>();
         for (Object items : crud.readAll()) {
             SweetShop item = (SweetShop) items;
@@ -107,7 +107,7 @@ public class SweetShopController {
     public void distributeOrder(String user) {
         //countOrder(String[] items)메서드에서 카운트한 변수를 이용하여 
         //date, payment, paymentMethod의 인덱스길이를 menu, size, cost만큼 늘린다.
-        List<SweetShop> orderList = pickOrder(user); //데이터파일에서 user가 주문한 내역을 List로 불러온다.
+        List<SweetShop> orderList = readUserOrder(user); //데이터파일에서 user가 주문한 내역을 List로 불러온다.
         separateOrder(orderList);
 
         int currentIndex = 0;
