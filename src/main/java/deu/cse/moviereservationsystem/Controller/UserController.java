@@ -16,7 +16,8 @@ import java.util.Objects;
 public class UserController {
 
     private static UserController userController = new UserController();
-
+    private String id;
+    
     public static UserController getInstance() {
         return userController;
     }
@@ -36,6 +37,7 @@ public class UserController {
                 return null;
             }
         if (pw.equals(user.getPw())) {
+            this.id=id;
             System.out.println("Success Login!");
             return user;
         }
@@ -69,5 +71,9 @@ public class UserController {
             }
         }
         return null;                    // 존재하지 않으면 null 반환
+    }
+
+    public String getId() {
+        return id;
     }
 }

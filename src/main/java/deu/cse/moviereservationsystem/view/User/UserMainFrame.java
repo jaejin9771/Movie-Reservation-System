@@ -4,6 +4,7 @@
  */
 package deu.cse.moviereservationsystem.view.User;
 
+import deu.cse.moviereservationsystem.Controller.UserController;
 import deu.cse.moviereservationsystem.view.MainFrame;
 import deu.cse.moviereservationsystem.view.Movie.MovieScreeningFrame;
 import deu.cse.moviereservationsystem.view.Payment.PaymentFrame;
@@ -19,9 +20,11 @@ public class UserMainFrame extends javax.swing.JFrame {
     /**
      * Creates new form UserMainFrame
      */
+    UserController user = UserController.getInstance();
     public UserMainFrame() {
         initComponents();
         setLocationRelativeTo(null);
+        setID.setText(user.getId());
     }
 
     /**
@@ -35,7 +38,7 @@ public class UserMainFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         previousFrameButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        setID = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         movieFrameButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -54,8 +57,8 @@ public class UserMainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
-        jLabel1.setText("id");
+        setID.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
+        setID.setText("id");
 
         jLabel2.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
         jLabel2.setText("님 환영합니다!");
@@ -66,7 +69,7 @@ public class UserMainFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(setID, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -78,7 +81,7 @@ public class UserMainFrame extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(previousFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
+                    .addComponent(setID)
                     .addComponent(jLabel2)))
         );
 
@@ -193,11 +196,11 @@ public class UserMainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton movieFrameButton;
     private javax.swing.JButton paymentFrameButton;
     private javax.swing.JButton previousFrameButton;
+    private javax.swing.JLabel setID;
     // End of variables declaration//GEN-END:variables
 }

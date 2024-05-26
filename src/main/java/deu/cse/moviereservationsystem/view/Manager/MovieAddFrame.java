@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package deu.cse.moviereservationsystem.view.Movie;
+package deu.cse.moviereservationsystem.view.Manager;
 
 import deu.cse.moviereservationsystem.Controller.MovieController;
 import deu.cse.moviereservationsystem.Entity.Movie.Movie;
