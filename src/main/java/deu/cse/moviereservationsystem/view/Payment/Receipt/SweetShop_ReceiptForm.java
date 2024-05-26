@@ -40,6 +40,7 @@ public class SweetShop_ReceiptForm {
 
     public StringBuilder setTextArea() {
         StringBuilder builder = new StringBuilder();
+        builder.append(String.format("주문날짜: %s\n", shop.getDate()));
         builder.append("-------------------------------------------------------------------------------\n");
         builder.append(String.format("%-30s \t%-30s \t  %-15s\n", "메뉴", "사이즈", "가격"));
         builder.append("-------------------------------------------------------------------------------\n");
@@ -61,7 +62,9 @@ public class SweetShop_ReceiptForm {
             // 남은 메뉴 이름 출력 (길이가 25 이하인 경우)
             builder.append(String.format("%-25s %-30s %-15s\n", menu, size, cost));
         }
-
+        builder.append("-------------------------------------------------------------------------------\n");
+        builder.append(String.format("총 가격: %d\n", shop.getPayment()));
+        builder.append(String.format("결제수단: %s\n", shop.getPaymentMethod()));
         return builder;
     }
 

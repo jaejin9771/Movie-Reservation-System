@@ -4,6 +4,9 @@
  */
 package deu.cse.moviereservationsystem.view.Manager;
 
+import deu.cse.moviereservationsystem.Controller.SweetShop.SweeetShopStatsController;
+import deu.cse.moviereservationsystem.Entity.SweetShopEntity.SweetShop;
+
 /**
  *
  * @author LG
@@ -13,8 +16,20 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
     /**
      * Creates new form SweetShopStatsFrame
      */
+    SweeetShopStatsController stats = new SweeetShopStatsController();
+
     public SweetShopStatsFrame() {
         initComponents();
+        setTable();
+    }
+
+    private void setTable() {
+        for (int i = 0; i < stats.getCountSize(); i++) {
+            sweetShopStatsTable.setValueAt(stats.getDates(), i, 0);
+            sweetShopStatsTable.setValueAt(stats.getName(), i, 1);
+            sweetShopStatsTable.setValueAt(stats.getPaymentMethod(), i, 2);
+            sweetShopStatsTable.setValueAt(stats.getPayment(), i, 3);
+        }
     }
 
     /**
@@ -33,7 +48,7 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         checkButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        sweetShopStatsTable = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,18 +104,15 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        sweetShopStatsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "주문일자", "고객정보", "결제수단", "결제가격"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(sweetShopStatsTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,21 +120,21 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2))
+                .addContainerGap(407, Short.MAX_VALUE)
+                .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
                 .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -152,7 +164,7 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JButton previousFrameButton;
+    private javax.swing.JTable sweetShopStatsTable;
     // End of variables declaration//GEN-END:variables
 }

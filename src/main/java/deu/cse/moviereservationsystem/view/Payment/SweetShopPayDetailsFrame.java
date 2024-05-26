@@ -23,7 +23,7 @@ public class SweetShopPayDetailsFrame extends javax.swing.JFrame {
      */
     UserController user = UserController.getInstance();
     SweetShopController controller = new SweetShopController();
-    List<SweetShop> order = controller.pickOrder("이지민");
+    List<SweetShop> order = controller.readUserOrder("이지민");
     DefaultTableModel model; //JTable 객체
 
     public SweetShopPayDetailsFrame() {
