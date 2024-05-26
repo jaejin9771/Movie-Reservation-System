@@ -15,9 +15,7 @@ import java.util.List;
 public class SweetShop_ReceiptForm {
 
     SweetShop shop;
-    String startLine = "-------------------------- 영수증 출력 -------------------------";
-    String endLine = "------------------------------------------------------------------";
-    String title = "메뉴\t 사이즈\t 가격";
+
     List<String> menus = new ArrayList<>();
     List<String> sizes = new ArrayList<>();
     List<Integer> costs = new ArrayList<>();
@@ -42,14 +40,29 @@ public class SweetShop_ReceiptForm {
 
     public StringBuilder setTextArea() {
         StringBuilder builder = new StringBuilder();
-        builder.append(startLine).append("\n"); // 줄바꿈 추가
-        builder.append(title).append("\n"); // 줄바꿈 추가
+        builder.append("-------------------------------------------------------------------------------\n");
+        builder.append(String.format("%-30s \t%-30s \t  %-15s\n", "메뉴", "사이즈", "가격"));
+        builder.append("-------------------------------------------------------------------------------\n");
         for (int i = 0; i < menus.size(); i++) {
-            builder.append(String.format("%-20s %-10s %10d\n", menus.get(i), sizes.get(i), costs.get(i)));
+            String menu = menus.get(i);
+            String size = sizes.get(i);
+            String cost = String.valueOf(costs.get(i));
+
+            while (menu.length() > 20) {
+                // 메뉴 이름을 25자로 자르고 줄바꿈
+                builder.append(String.format("%-25s %-30s %-15s\n", menu.substring(0, 20), size, cost));
+                // 남은 문자열로 메뉴 이름 업데이트
+                menu = menu.substring(20);
+                // 사이즈와 비용은 첫 줄에만 출력되므로 빈 문자열로 설정
+                size = "";
+                cost = "";
+            }
+
+            // 남은 메뉴 이름 출력 (길이가 25 이하인 경우)
+            builder.append(String.format("%-25s %-30s %-15s\n", menu, size, cost));
         }
-        builder.append(endLine).append("\n"); // 줄바꿈 추가
-        builder.append(shop.getPayment()).append("\n"); // 줄바꿈 추가
-        builder.append(shop.getPaymentMethod()).append("\n"); // 줄바꿈 추가
+
         return builder;
     }
+
 }
