@@ -7,6 +7,7 @@ package deu.cse.moviereservationsystem.view.User;
 import deu.cse.moviereservationsystem.Controller.UserController;
 import deu.cse.moviereservationsystem.Entity.User.User;
 import deu.cse.moviereservationsystem.view.MainFrame;
+import deu.cse.moviereservationsystem.view.Manager.ManagerMainFrame;
 import java.awt.Color;
 import java.util.Objects;
 import javax.swing.JOptionPane;
@@ -43,8 +44,7 @@ public class LoginFrame extends javax.swing.JFrame {
         inputId = new javax.swing.JTextField();
         inputPw = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
-        foundIDFrameButton = new javax.swing.JButton();
-        foundPWFrameButton = new javax.swing.JButton();
+        managerButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,19 +99,12 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        foundIDFrameButton.setBackground(new java.awt.Color(204, 204, 204));
-        foundIDFrameButton.setText("ID찾기");
-        foundIDFrameButton.addActionListener(new java.awt.event.ActionListener() {
+        managerButton.setBackground(new java.awt.Color(204, 204, 204));
+        managerButton.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
+        managerButton.setText("관리자");
+        managerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                foundIDFrameButtonActionPerformed(evt);
-            }
-        });
-
-        foundPWFrameButton.setBackground(new java.awt.Color(204, 204, 204));
-        foundPWFrameButton.setText("PW 찾기");
-        foundPWFrameButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                foundPWFrameButtonActionPerformed(evt);
+                managerButtonActionPerformed(evt);
             }
         });
 
@@ -121,22 +114,22 @@ public class LoginFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inputId)
-                    .addComponent(inputPw, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
-                .addContainerGap(83, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(foundIDFrameButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(foundPWFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(inputId)
+                            .addComponent(inputPw, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(managerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -152,11 +145,9 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(inputPw, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(foundIDFrameButton)
-                        .addComponent(foundPWFrameButton)))
+                    .addComponent(managerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -194,24 +185,14 @@ public class LoginFrame extends javax.swing.JFrame {
         //JOptionPane.showMessageDialog(null, "로그인 정보가 맞지 않습니다.");
     }//GEN-LAST:event_loginButtonActionPerformed
 
-    private void foundIDFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foundIDFrameButtonActionPerformed
-        // TODO add your handling code here:
-        FoundIDFrame id = new FoundIDFrame();
-        id.setVisible(true);
+    private void managerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerButtonActionPerformed
+        ManagerMainFrame managerFrame = new ManagerMainFrame();
+        managerFrame.setVisible(true);
         dispose();
-    }//GEN-LAST:event_foundIDFrameButtonActionPerformed
-
-    private void foundPWFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foundPWFrameButtonActionPerformed
-        // TODO add your handling code here:
-        FoundPWFrame pw = new FoundPWFrame();
-        pw.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_foundPWFrameButtonActionPerformed
+    }//GEN-LAST:event_managerButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton foundIDFrameButton;
-    private javax.swing.JButton foundPWFrameButton;
     private javax.swing.JTextField inputId;
     private javax.swing.JTextField inputPw;
     private javax.swing.JLabel jLabel1;
@@ -219,6 +200,7 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginButton;
+    private javax.swing.JButton managerButton;
     private javax.swing.JButton previousFrameButton;
     // End of variables declaration//GEN-END:variables
 }
