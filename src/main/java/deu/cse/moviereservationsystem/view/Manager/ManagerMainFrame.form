@@ -31,9 +31,9 @@
                   <Component id="showScheduleButton" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="sweetShopStatsFrameButton" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="movieStatsFrameButton" min="-2" pref="123" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="sweetShopStatsFrameButton" pref="130" max="32767" attributes="0"/>
+                  <Component id="movieStatsFrameButton" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
           </Group>
@@ -140,6 +140,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="&#xc2a4;&#xc704;&#xd2b8;&#xc0f5; &#xd1b5;&#xacc4;"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sweetShopStatsFrameButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="showScheduleButton">
       <Properties>

@@ -17,6 +17,7 @@ public class ManagerMainFrame extends javax.swing.JFrame {
      */
     public ManagerMainFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -88,6 +89,11 @@ public class ManagerMainFrame extends javax.swing.JFrame {
 
         sweetShopStatsFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         sweetShopStatsFrameButton.setText("스위트샵 통계");
+        sweetShopStatsFrameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sweetShopStatsFrameButtonActionPerformed(evt);
+            }
+        });
 
         showScheduleButton.setBackground(new java.awt.Color(204, 204, 204));
         showScheduleButton.setText("상영 정보 등록");
@@ -108,9 +114,9 @@ public class ManagerMainFrame extends javax.swing.JFrame {
                     .addComponent(moieAddFrameButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(showScheduleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(sweetShopStatsFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(movieStatsFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(sweetShopStatsFrameButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                    .addComponent(movieStatsFrameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(111, 111, 111))
         );
         layout.setVerticalGroup(
@@ -155,6 +161,13 @@ public class ManagerMainFrame extends javax.swing.JFrame {
         frame.setVisible(true);
         dispose();
     }//GEN-LAST:event_showScheduleButtonActionPerformed
+
+    private void sweetShopStatsFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sweetShopStatsFrameButtonActionPerformed
+        // TODO add your handling code here:
+        SweetShopStatsFrame stats = new SweetShopStatsFrame();
+        stats.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_sweetShopStatsFrameButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
