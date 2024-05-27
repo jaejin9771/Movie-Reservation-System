@@ -15,31 +15,49 @@ import java.util.List;
  * @author LG
  */
 public class SweeetShopStatsController {
+
     CrudRepository crud;
+
     List<String> dates = new ArrayList<>();
     List<String> names = new ArrayList<>();
     List<String> paymentMethods = new ArrayList<>();
     List<Integer> payments = new ArrayList<>();
-    int countSize = readFile().size();
-    
-    public SweeetShopStatsController(){
-        this.crud =  new SweetShopRepository(); 
+    int countSize;
+
+    public SweeetShopStatsController() {
+        this.crud = new SweetShopRepository();
         setVariable();
+        countSize = readFile().size();
     }
-    private List<SweetShop> readFile(){
+
+    private List<SweetShop> readFile() {
         List<SweetShop> list = new ArrayList<>();
-        for(Object object : crud.readAll()){
+        for (Object object : crud.readAll()) {
             SweetShop shop = (SweetShop) object;
             list.add(shop);
         }
         return list;
     }
-    private void setVariable(){
-        for(int i=0; i<readFile().size(); i++){
-            dates.add(readFile().get(i).getDate());
-            names.add(readFile().get(i).getUser());
-            paymentMethods.add(readFile().get(i).getPaymentMethod());
-            payments.add(readFile().get(i).getPayment());
+
+    public void separateOrder(List<SweetShop> list) {
+        //하나의 문자열로 결합된 주문내역을 menu, size,cost 별로 나눈다.
+        List<String> st = new ArrayList<>();
+        for (SweetShop l : list) {
+            st.add(l.getDate());
+        }
+        for (String s : st) {
+            String[] items = s.split(",");  
+            this.dates.add(s);
+        }
+    }
+
+    private void setVariable() {
+        List<SweetShop> sweetShops = readFile();
+        for (SweetShop shop : sweetShops) {
+            dates.add(shop.getDate());
+            names.add(shop.getUser());
+            paymentMethods.add(shop.getPaymentMethod());
+            payments.add(shop.getPayment());
         }
     }
 
@@ -58,7 +76,8 @@ public class SweeetShopStatsController {
     public List<Integer> getPayment() {
         return payments;
     }
-    public int getCountSize(){
+
+    public int getCountSize() {
         return countSize;
     }
 }
