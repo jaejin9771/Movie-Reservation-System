@@ -6,6 +6,7 @@ package deu.cse.moviereservationsystem.view.Manager;
 
 import com.toedter.calendar.JCalendar;
 import deu.cse.moviereservationsystem.Controller.SweetShop.SweeetShopStatsController;
+import deu.cse.moviereservationsystem.Pattern.SweetShopStrategy.StatsStrategy.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Calendar;
@@ -22,11 +23,10 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
      * Creates new form SweetShopStatsFrame
      */
     SweeetShopStatsController stats = new SweeetShopStatsController();
-    JCalendarStats c = new JCalendarStats();
     DefaultTableModel model;
-    int year;
-    int month;
-    int day;
+    int c_year;
+    int c_month;
+    int c_day;
 
     public SweetShopStatsFrame() {
         initComponents();
@@ -53,7 +53,8 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 printSelectedDate(calendar);
-                int yearP_total = c.calculateYearStats(String.valueOf(year));
+                YearStats year = new YearStats();
+                int yearP_total = year.calculateStats(String.valueOf(c_year));
                 yearStats.setText(String.valueOf(yearP_total));
             }
         });
@@ -63,7 +64,8 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 printSelectedDate(calendar);
-                int monthP_total = c.calculateMonthStats(String.format("%02d", month));
+                MonthStats month = new MonthStats();
+                int monthP_total = month.calculateStats(String.format("%02d", c_month));
                 monthStats.setText(String.valueOf(monthP_total));
             }
         });
@@ -73,7 +75,8 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 printSelectedDate(calendar);
-                int dayP_total = c.calculateDayStats(String.valueOf(year+"-"+ String.format("%02d", month)+"-"+String.format("%02d", day)));
+                DayStats day = new DayStats();
+                int dayP_total = day.calculateStats(String.valueOf(c_year + "-" + String.format("%02d", c_month) + "-" + String.format("%02d", c_day)));
                 dayStats.setText(String.valueOf(dayP_total));
             }
         });
@@ -85,9 +88,9 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
         Calendar cal = Calendar.getInstance();
         cal.setTime(selectedDate);
 
-        this.year = cal.get(Calendar.YEAR);
-        this.month = cal.get(Calendar.MONTH) + 1;
-        this.day = cal.get(Calendar.DAY_OF_MONTH);
+        this.c_year = cal.get(Calendar.YEAR);
+        this.c_month = cal.get(Calendar.MONTH) + 1;
+        this.c_day = cal.get(Calendar.DAY_OF_MONTH);
     }
 
     /**
