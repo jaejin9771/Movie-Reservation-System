@@ -20,7 +20,7 @@ public class Movie {
     public Movie() {
     }
     
-    public Movie(Builder builder) {
+    public Movie(MovieBuilder builder) {
         this.title = builder.title;
         this.director = builder.director;
         this.duration = builder.duration;
@@ -92,29 +92,29 @@ public class Movie {
         this.genre = genre;
     }
 
-    public static class Builder {
+    public static class MovieBuilder {
 
         private String title;
         private String genre;
         private String director;
         private int duration;
         
-        public Builder title(String title) {
+        public MovieBuilder title(String title) {
             this.title = title;
             return this;
         }
         
-        public Builder director(String director) {
+        public MovieBuilder director(String director) {
             this.director = director;
             return this;
         }
         
-        public Builder duration(int duration) {
+        public MovieBuilder duration(int duration) {
             this.duration = duration;
             return this;
         }
         
-        public Builder genre(String genre) {
+        public MovieBuilder genre(String genre) {
             this.genre = genre;
             return this;
         }

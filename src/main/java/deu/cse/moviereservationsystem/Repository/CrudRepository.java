@@ -110,4 +110,23 @@ public abstract class CrudRepository<T> {
             System.err.println("파일 재쓰기 중 오류 발생: " + e.getMessage());
         }
     }
+    
+    public List<String[]> readAlltoString() {
+        List<String[]> item = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] movie = line.split(","); // Split the TXT line by commas
+                item.add(movie);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return item;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+    
 }

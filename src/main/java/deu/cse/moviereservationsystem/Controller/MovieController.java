@@ -4,9 +4,9 @@
  */
 package deu.cse.moviereservationsystem.Controller;
 
-import deu.cse.moviereservationsystem.Dto.Movie.MovieDto;
 import deu.cse.moviereservationsystem.Entity.Movie.Movie;
 import deu.cse.moviereservationsystem.Repository.MovieRepository;
+import deu.cse.moviereservationsystem.Repository.ShowScheduleRepository;
 import java.util.Objects;
 
 /**
@@ -18,6 +18,7 @@ public class MovieController {
     public static MovieController getInstance() { return movieController;}
     
     private MovieRepository movieRepository;
+    private ShowScheduleRepository showScheduleRepository;
     
     public MovieController() {
         this.movieRepository = new MovieRepository();

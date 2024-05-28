@@ -4,20 +4,42 @@
  */
 package deu.cse.moviereservationsystem.view.Movie;
 
+import deu.cse.moviereservationsystem.Controller.MovieController;
 import deu.cse.moviereservationsystem.view.User.UserMainFrame;
-
+import javax.swing.table.DefaultTableModel;
+import deu.cse.moviereservationsystem.Repository.MovieRepository;
+import java.util.List;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 /**
  *
  * @author LG
  */
 public class MovieScreeningFrame extends javax.swing.JFrame {
-
+    
+    MovieRepository movieRepository = new MovieRepository();
+    
     /**
      * Creates new form MovieScreeningFrame
      */
     public MovieScreeningFrame() {
         initComponents();
+        String[] columnNames = {"제목", "장르", "감독", "상영 시간(분)"};
+        
+        // 영화 정보 읽어오기
+        List<String[]> movieData = movieRepository.readAlltoString();
+        
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+        //jTable = new JTable(tableModel);
+        
+        for (String[] movie : movieData) {
+            tableModel.addRow(movie);
+        }
+        
+        jTable.setModel(tableModel);
+        
         setLocationRelativeTo(null);
+       
     }
 
     /**
@@ -33,7 +55,7 @@ public class MovieScreeningFrame extends javax.swing.JFrame {
         previousFrameButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         ReservationFrameButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,7 +92,7 @@ public class MovieScreeningFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1)))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -78,10 +100,10 @@ public class MovieScreeningFrame extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "제목", "장르", "감독", "상영 시간(분)"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable);
 
         ReservationFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         ReservationFrameButton.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
@@ -141,7 +163,7 @@ public class MovieScreeningFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     private javax.swing.JButton previousFrameButton;
     // End of variables declaration//GEN-END:variables
 }
