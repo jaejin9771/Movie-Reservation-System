@@ -24,43 +24,6 @@ public class SweeetShopStatsController {
     List<Integer> payments = new ArrayList<>();
     int countSize;
 
-    public SweeetShopStatsController() {
-        this.crud = new SweetShopRepository();
-        setVariable();
-        countSize = readFile().size();
-    }
-
-    private List<SweetShop> readFile() {
-        List<SweetShop> list = new ArrayList<>();
-        for (Object object : crud.readAll()) {
-            SweetShop shop = (SweetShop) object;
-            list.add(shop);
-        }
-        return list;
-    }
-
-    public void separateOrder(List<SweetShop> list) {
-        //하나의 문자열로 결합된 주문내역을 menu, size,cost 별로 나눈다.
-        List<String> st = new ArrayList<>();
-        for (SweetShop l : list) {
-            st.add(l.getDate());
-        }
-        for (String s : st) {
-            String[] items = s.split(",");  
-            this.dates.add(s);
-        }
-    }
-
-    private void setVariable() {
-        List<SweetShop> sweetShops = readFile();
-        for (SweetShop shop : sweetShops) {
-            dates.add(shop.getDate());
-            names.add(shop.getUser());
-            paymentMethods.add(shop.getPaymentMethod());
-            payments.add(shop.getPayment());
-        }
-    }
-
     public List<String> getDates() {
         return dates;
     }
@@ -79,5 +42,42 @@ public class SweeetShopStatsController {
 
     public int getCountSize() {
         return countSize;
+    }
+
+    public SweeetShopStatsController() {
+        this.crud = new SweetShopRepository();
+        setVariable();
+        countSize = readFile().size();
+    }
+
+    public List<SweetShop> readFile() {
+        List<SweetShop> list = new ArrayList<>();
+        for (Object object : crud.readAll()) {
+            SweetShop shop = (SweetShop) object;
+            list.add(shop);
+        }
+        return list;
+    }
+
+    public void separateOrder(List<SweetShop> list) {
+        //하나의 문자열로 결합된 주문내역을 menu, size,cost 별로 나눈다.
+        List<String> st = new ArrayList<>();
+        for (SweetShop l : list) {
+            st.add(l.getDate());
+        }
+        for (String s : st) {
+            String[] items = s.split(",");
+            this.dates.add(s);
+        }
+    }
+
+    private void setVariable() {
+        List<SweetShop> sweetShops = readFile();
+        for (SweetShop shop : sweetShops) {
+            dates.add(shop.getDate());
+            names.add(shop.getUser());
+            paymentMethods.add(shop.getPaymentMethod());
+            payments.add(shop.getPayment());
+        }
     }
 }

@@ -6,6 +6,10 @@ package deu.cse.moviereservationsystem.view.Manager;
 
 import com.toedter.calendar.JCalendar;
 import deu.cse.moviereservationsystem.Controller.SweetShop.SweeetShopStatsController;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,11 +22,16 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
      * Creates new form SweetShopStatsFrame
      */
     SweeetShopStatsController stats = new SweeetShopStatsController();
+    JCalendarStats c = new JCalendarStats();
     DefaultTableModel model;
+    int year;
+    int month;
+    int day;
 
     public SweetShopStatsFrame() {
         initComponents();
         this.model = (DefaultTableModel) sweetShopStatsTable.getModel();
+        setLocationRelativeTo(null);
         setTable();
         setCalendar();
     }
@@ -36,8 +45,49 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
 
     private void setCalendar() {
         JCalendar calendar = new JCalendar();
-        calendar.setBounds(350, 100, 150, 150);
+        calendar.setBounds(350, 80, 150, 150);
         add(calendar);
+
+        // 연도 변경 이벤트 리스너 추가
+        calendar.getYearChooser().addPropertyChangeListener("year", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                printSelectedDate(calendar);
+                int yearP_total = c.calculateYearStats(String.valueOf(year));
+                yearStats.setText(String.valueOf(yearP_total));
+            }
+        });
+
+        // 월 변경 이벤트 리스너 추가
+        calendar.getMonthChooser().addPropertyChangeListener("month", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                printSelectedDate(calendar);
+                int monthP_total = c.calculateMonthStats(String.format("%02d", month));
+                monthStats.setText(String.valueOf(monthP_total));
+            }
+        });
+
+        // 일자 변경 이벤트 리스너 추가
+        calendar.getDayChooser().addPropertyChangeListener("day", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                printSelectedDate(calendar);
+                int dayP_total = c.calculateDayStats(String.valueOf(year+"-"+ String.format("%02d", month)+"-"+String.format("%02d", day)));
+                dayStats.setText(String.valueOf(dayP_total));
+            }
+        });
+        setVisible(true);
+    }
+
+    private void printSelectedDate(JCalendar calendar) {
+        Date selectedDate = calendar.getDate();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(selectedDate);
+
+        this.year = cal.get(Calendar.YEAR);
+        this.month = cal.get(Calendar.MONTH) + 1;
+        this.day = cal.get(Calendar.DAY_OF_MONTH);
     }
 
     /**
@@ -57,10 +107,12 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
         checkButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         sweetShopStatsTable = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        yearStats = new javax.swing.JTextField();
+        monthStats = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        dayStats = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -130,6 +182,8 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
 
         jLabel3.setText("월별 통계");
 
+        jLabel4.setText("일별 통계");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,16 +199,19 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3)
-                                .addGap(18, 18, 18)))
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(yearStats)
+                            .addComponent(monthStats, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                            .addComponent(dayStats))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -168,13 +225,17 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
                         .addGap(10, 10, 10))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(yearStats, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(monthStats, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(92, 92, 92)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dayStats, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(55, 55, 55)))
                 .addComponent(checkButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -199,16 +260,18 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton checkButton;
+    private javax.swing.JTextField dayStats;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField monthStats;
     private javax.swing.JButton previousFrameButton;
     private javax.swing.JTable sweetShopStatsTable;
+    private javax.swing.JTextField yearStats;
     // End of variables declaration//GEN-END:variables
 }
