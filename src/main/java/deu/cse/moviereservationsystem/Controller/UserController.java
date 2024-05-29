@@ -5,6 +5,7 @@
 package deu.cse.moviereservationsystem.Controller;
 
 import deu.cse.moviereservationsystem.Entity.User.User;
+import deu.cse.moviereservationsystem.Entity.User.User.UserBuilder;
 import deu.cse.moviereservationsystem.Repository.UserRepository;
 import java.util.List;
 import java.util.Objects;
@@ -50,7 +51,11 @@ public class UserController {
         User user = findById(id);
 
         if (Objects.isNull(user)) {
-            user = userRepository.create(new User(name, id, pw));
+            user = userRepository.create(new UserBuilder()
+                                                                .name(name)
+                                                                .id(id)
+                                                                .pw(pw)
+                                                                .build());
             if (Objects.isNull(user)) {
                 return null;
             }

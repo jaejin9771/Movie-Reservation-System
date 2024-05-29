@@ -157,7 +157,7 @@ public class ManagerMainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_movieStatsFrameButtonActionPerformed
 
     private void showScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showScheduleButtonActionPerformed
-        ShowScheduleAddFrame frame = new ShowScheduleAddFrame();
+        MovieFrame frame = new MovieFrame();
         frame.setVisible(true);
         dispose();
     }//GEN-LAST:event_showScheduleButtonActionPerformed

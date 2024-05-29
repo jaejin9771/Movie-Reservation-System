@@ -1,2 +1,1 @@
-aaa,ccc,bbbb,150
-aaaa,aaa,aaa,12
+해운대,공포,배재진,130

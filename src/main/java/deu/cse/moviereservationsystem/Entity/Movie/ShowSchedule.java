@@ -14,12 +14,14 @@ import java.util.Objects;
 public class ShowSchedule {
     private String title;
     private String theater;
-    private LocalDateTime showTime;
+    private LocalDateTime dateTime;
+    private int duration;
 
-    public ShowSchedule(String title, String theater, LocalDateTime showTime) {
+    public ShowSchedule(String title, String theater, LocalDateTime showTime, int duration) {
         this.title = title;
         this.theater = theater;
-        this.showTime = showTime;
+        this.dateTime = showTime;
+        this.duration = duration;
     }
 
     public String getTitle() {
@@ -39,13 +41,16 @@ public class ShowSchedule {
     }
 
     public LocalDateTime getShowTime() {
-        return showTime;
+        return dateTime;
     }
 
     public void setShowTime(LocalDateTime showTime) {
-        this.showTime = showTime;
+        this.dateTime = showTime;
     }
     
+    public int getDuration() {
+        return duration;
+    }
     @Override
     public boolean equals(Object obj) {
         // 같은 참조인지 확인
@@ -62,13 +67,14 @@ public class ShowSchedule {
         ShowSchedule ss = (ShowSchedule) obj;
         return title == ss.title
                 && Objects.equals(theater, ss.theater)
-                && showTime.isEqual(ss.showTime);
+                && dateTime.isEqual(ss.dateTime)
+                && duration == ss.duration;
     }
     
     @Override
     public int hashCode() {
         // Objects.hash를 사용하여 필드를 기반으로 해시 코드 생성
-        return Objects.hash(title, theater, showTime);
+        return Objects.hash(title, theater, dateTime,duration);
     }
     
     

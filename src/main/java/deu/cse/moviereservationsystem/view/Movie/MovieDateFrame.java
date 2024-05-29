@@ -4,6 +4,7 @@
  */
 package deu.cse.moviereservationsystem.view.Movie;
 
+import deu.cse.moviereservationsystem.Controller.ScheduleController;
 import javax.swing.ListSelectionModel;
 
 
@@ -12,14 +13,17 @@ import javax.swing.ListSelectionModel;
  * @author LG
  */
 public class MovieDateFrame extends javax.swing.JFrame {
-
+    private String title;
+    ScheduleController scheduleController = ScheduleController.getInstance();
     /**
      * Creates new form MovieDateFrame
      */
-    public MovieDateFrame() {
+    public MovieDateFrame(String title) {
         initComponents();
         onlySingleColumn();
         setLocationRelativeTo(null);
+        this.title = title;
+        movieDateTable.setModel(scheduleController.updateTable(title));
     }
     private void onlySingleColumn(){
         movieDateTable.setCellSelectionEnabled(true);
@@ -39,7 +43,7 @@ public class MovieDateFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         previousFrameButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        textLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         movieDateTable = new javax.swing.JTable();
         selectedDateButton = new javax.swing.JButton();
@@ -66,7 +70,7 @@ public class MovieDateFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 415, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(previousFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -78,21 +82,29 @@ public class MovieDateFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1)))
         );
 
-        jLabel2.setBackground(new java.awt.Color(229, 229, 229));
-        jLabel2.setFont(new java.awt.Font("맑은 고딕", 0, 24)); // NOI18N
-        jLabel2.setText("영화제목");
+        textLabel.setBackground(new java.awt.Color(229, 229, 229));
+        textLabel.setFont(new java.awt.Font("맑은 고딕", 0, 24)); // NOI18N
+        textLabel.setText("예약할 날짜를 선택해주세요.");
 
         movieDateTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "1관", "2관", "3관"
+                "제목", "상영관", "상영날짜", "상영시간(분)"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(movieDateTable);
 
         selectedDateButton.setBackground(new java.awt.Color(204, 204, 204));
@@ -113,8 +125,8 @@ public class MovieDateFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(222, 222, 222)
-                        .addComponent(jLabel2)
-                        .addGap(189, 222, Short.MAX_VALUE))
+                        .addComponent(textLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1))
@@ -128,7 +140,7 @@ public class MovieDateFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -158,11 +170,11 @@ public class MovieDateFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable movieDateTable;
     private javax.swing.JButton previousFrameButton;
     private javax.swing.JButton selectedDateButton;
+    private javax.swing.JLabel textLabel;
     // End of variables declaration//GEN-END:variables
 }

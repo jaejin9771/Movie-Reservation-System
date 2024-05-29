@@ -11,35 +11,38 @@ import deu.cse.moviereservationsystem.Repository.MovieRepository;
 import java.util.List;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
 /**
  *
  * @author LG
  */
 public class MovieScreeningFrame extends javax.swing.JFrame {
-    
+
     MovieRepository movieRepository = new MovieRepository();
-    
+
+    private String title;
+
     /**
      * Creates new form MovieScreeningFrame
      */
     public MovieScreeningFrame() {
         initComponents();
         String[] columnNames = {"제목", "장르", "감독", "상영 시간(분)"};
-        
+
         // 영화 정보 읽어오기
         List<String[]> movieData = movieRepository.readAlltoString();
-        
+
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
         //jTable = new JTable(tableModel);
-        
+
         for (String[] movie : movieData) {
             tableModel.addRow(movie);
         }
-        
+
         jTable.setModel(tableModel);
-        
+
         setLocationRelativeTo(null);
-       
+
     }
 
     /**
@@ -150,9 +153,13 @@ public class MovieScreeningFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_previousFrameButtonActionPerformed
 
     private void ReservationFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReservationFrameButtonActionPerformed
-        // TODO add your handling code here:
-        //JTable 클릭한 행의 영화 정보 가지고 와야 함
-        MovieDateFrame date = new MovieDateFrame();
+        // TODO add your handling code here:        
+
+        int row = jTable.getSelectedRow();
+        
+        title = (String) jTable.getValueAt(row, 0);
+        
+        MovieDateFrame date = new MovieDateFrame(title);
         date.setVisible(true);
         dispose();
     }//GEN-LAST:event_ReservationFrameButtonActionPerformed

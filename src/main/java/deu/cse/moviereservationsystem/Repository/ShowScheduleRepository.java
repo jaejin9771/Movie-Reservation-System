@@ -24,11 +24,12 @@ public class ShowScheduleRepository extends CrudRepository<ShowSchedule>{
     protected ShowSchedule fromString(String str) {
         String[] parts = str.split(",");
         
-        return new ShowSchedule(parts[0],parts[1],LocalDateTime.parse(parts[2], formatter));
+        return new ShowSchedule(parts[0],parts[1],LocalDateTime.parse(parts[2], formatter), Integer.parseInt(parts[3]));
     }
     
     @Override
     protected String toString(ShowSchedule showSchedule){
-        return showSchedule.getTitle() + "," + showSchedule.getTheater() + "," + showSchedule.getShowTime();
+        return showSchedule.getTitle() + "," + showSchedule.getTheater() + "," + showSchedule.getShowTime() + "," + showSchedule.getDuration();
     }
+    
 }
