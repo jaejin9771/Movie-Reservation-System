@@ -66,7 +66,7 @@ public abstract class CrudRepository<T> {
         }
         return items;
     }
-
+    
     /**
      * 데이터를 수정
      * @param oldItem 수정할 객체
