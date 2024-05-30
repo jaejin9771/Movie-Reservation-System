@@ -5,16 +5,20 @@
 package deu.cse.moviereservationsystem.view.Movie;
 
 import deu.cse.moviereservationsystem.Controller.ScheduleController;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javax.swing.ListSelectionModel;
-
 
 /**
  *
  * @author LG
  */
 public class MovieDateFrame extends javax.swing.JFrame {
+
     private String title;
     ScheduleController scheduleController = ScheduleController.getInstance();
+
     /**
      * Creates new form MovieDateFrame
      */
@@ -25,12 +29,14 @@ public class MovieDateFrame extends javax.swing.JFrame {
         this.title = title;
         movieDateTable.setModel(scheduleController.updateTable(title));
     }
-    private void onlySingleColumn(){
+
+    private void onlySingleColumn() {
         movieDateTable.setCellSelectionEnabled(true);
         ListSelectionModel cellSelectionModel = movieDateTable.getSelectionModel();
         cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         movieDateTable.setColumnSelectionAllowed(true);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -160,11 +166,26 @@ public class MovieDateFrame extends javax.swing.JFrame {
     private void selectedDateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectedDateButtonActionPerformed
         // TODO add your handling code here:
         //선택된 영화정보와 날짜정보를 가지고 와야 함
-        MovieSeatFrame seat = new MovieSeatFrame();
-        seat.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_selectedDateButtonActionPerformed
+        int row = movieDateTable.getSelectedRow();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String title = (String) movieDateTable.getValueAt(row, 0);
+        String theater = (String) movieDateTable.getValueAt(row, 1);
+        String str = (String) movieDateTable.getValueAt(row, 2);
+        int duration = Integer.parseInt(String.valueOf(movieDateTable.getValueAt(row, 3)));
+        try {
+            LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
 
+            System.out.println("Result: " + dateTime.toString());
+            scheduleController.delete(title, theater, dateTime, duration);
+            MovieSeatFrame seat = new MovieSeatFrame(title, theater, dateTime, duration);
+            seat.setVisible(true);
+            dispose();
+        } catch (DateTimeParseException ex) {
+
+            ex.printStackTrace();
+        }
+
+    }//GEN-LAST:event_selectedDateButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
