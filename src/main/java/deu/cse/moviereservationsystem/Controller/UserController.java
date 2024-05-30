@@ -18,7 +18,7 @@ public class UserController {
 
     private static UserController userController = new UserController();
     private String id;
-    
+
     public static UserController getInstance() {
         return userController;
     }
@@ -32,37 +32,35 @@ public class UserController {
     public User Login(String id, String pw) {
 
         User user = findById(id);
-        
+
         if (Objects.isNull(user)) {
             System.out.println("Failed Login.");
-                return null;
-            }
+            return null;
+        }
         if (pw.equals(user.getPw())) {
-            this.id=id;
+            this.id = id;
             System.out.println("Success Login!");
             return user;
         }
         System.out.println("Wrong Password.");
-        return null;        
+        return null;
     }
 
     public User signUp(String name, String id, String pw) {
-
         User user = findById(id);
-
         if (Objects.isNull(user)) {
             user = userRepository.create(new UserBuilder()
-                                                                .name(name)
-                                                                .id(id)
-                                                                .pw(pw)
-                                                                .build());
+                    .name(name)
+                    .id(id)
+                    .pw(pw)
+                    .build());
             if (Objects.isNull(user)) {
                 return null;
             }
         } else {
             return null;
         }
-        
+
         return user;
     }
 
@@ -78,6 +76,31 @@ public class UserController {
         return null;                    // 존재하지 않으면 null 반환
     }
 
+    public String checkModifiedPW(String id) {
+        String name = "";
+        List<User> userList = userRepository.readAll();
+        for (User u : userList) {
+            if (id.equals(u.getId())) { //입력받은 id 정보의 pw를 
+                name = u.getName();
+            }
+        }
+        return name;
+    }
+
+    public User modifyPassword(String id, String pw, String name) {
+        User user = userRepository.create(new UserBuilder()
+                .name(name)
+                .id(id)
+                .pw(pw)
+                .build());
+        return user;
+    }
+    
+    public void updateUser(User oldUser, User newUser){
+        userRepository.delete(oldUser);
+        userRepository.update(oldUser, newUser);
+    }
+    
     public String getId() {
         return id;
     }
