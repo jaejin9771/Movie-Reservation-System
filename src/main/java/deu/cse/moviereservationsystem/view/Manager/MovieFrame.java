@@ -24,19 +24,7 @@ public class MovieFrame extends javax.swing.JFrame {
     public MovieFrame() {
         initComponents();
         
-        String[] columnNames = {"제목", "장르", "감독", "상영 시간(분)"};
-        
-        // 영화 정보 읽어오기
-        List<String[]> movieData = movieController.readMovietoString();
-        
-        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
-        //jTable = new JTable(tableModel);
-        
-        for (String[] movie : movieData) {
-            tableModel.addRow(movie);
-        }
-        
-        jTable.setModel(tableModel);
+        jTable.setModel(movieController.updateTable());
         
         setLocationRelativeTo(null);
     }

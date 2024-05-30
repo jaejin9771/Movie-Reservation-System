@@ -19,7 +19,7 @@ import javax.swing.JTable;
 public class MovieScreeningFrame extends javax.swing.JFrame {
 
     MovieRepository movieRepository = new MovieRepository();
-
+    MovieController movieController = new MovieController();
     private String title;
 
     /**
@@ -27,19 +27,9 @@ public class MovieScreeningFrame extends javax.swing.JFrame {
      */
     public MovieScreeningFrame() {
         initComponents();
-        String[] columnNames = {"제목", "장르", "감독", "상영 시간(분)"};
+        
 
-        // 영화 정보 읽어오기
-        List<String[]> movieData = movieRepository.readAlltoString();
-
-        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
-        //jTable = new JTable(tableModel);
-
-        for (String[] movie : movieData) {
-            tableModel.addRow(movie);
-        }
-
-        jTable.setModel(tableModel);
+        jTable.setModel(movieController.updateTable());
 
         setLocationRelativeTo(null);
 

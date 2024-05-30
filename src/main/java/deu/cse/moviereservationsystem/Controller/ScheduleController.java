@@ -43,34 +43,46 @@ public class ScheduleController {
         }
         return true;
     }
-    
+
     public void delete(String title, String theater, LocalDateTime dateTime, int duration) {
-        showScheduleRepository.delete(new ShowSchedule(title,theater,dateTime,duration));
+        showScheduleRepository.delete(new ShowSchedule(title, theater, dateTime, duration));
     }
     
     public DefaultTableModel updateTable() {
         List<String[]> scheduleData = readScheduletoString();
 
-        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // All cells are not editable
+            }
+        };
         //jTable = new JTable(tableModel);
 
         for (String[] schedule : scheduleData) {
             tableModel.addRow(schedule);
         }
-        
+
         return tableModel;
     }
-    
+
     public DefaultTableModel updateTable(String title) {
         List<String[]> scheduleData = readScheduletoString();
 
-        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // All cells are not editable
+            }
+        };
         //jTable = new JTable(tableModel);
 
         for (String[] schedule : scheduleData) {
-            if(title.equals(schedule[0])) tableModel.addRow(schedule);
+            if (title.equals(schedule[0])) {
+                tableModel.addRow(schedule);
+            }
         }
-        
+
         return tableModel;
     }
 }

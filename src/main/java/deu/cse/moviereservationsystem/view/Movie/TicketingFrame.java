@@ -26,14 +26,12 @@ public class TicketingFrame extends javax.swing.JFrame {
     private LocalDateTime dateTime;
     private int duration;
     String[] seats;
+    private final int price = 8000;
     /**
      * Creates new form TicketingFrame
      */
     public TicketingFrame() {
         initComponents();
-        ButtonGroup group = new ButtonGroup();
-        group.add(cash);
-        group.add(card);
     }
     
     public TicketingFrame(String[] seats,String title, String theater,LocalDateTime dateTime,int duration) {
@@ -54,7 +52,7 @@ public class TicketingFrame extends javax.swing.JFrame {
         }
         dateField.setText(dateTime.toString());
         seatField.setText(seatNames);
-        priceField.setText(Integer.toString(i * 8000));
+        priceField.setText(Integer.toString(i * price));
         
     }
     
