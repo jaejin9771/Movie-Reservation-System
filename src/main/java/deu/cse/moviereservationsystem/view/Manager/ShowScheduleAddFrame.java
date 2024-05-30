@@ -32,7 +32,7 @@ public class ShowScheduleAddFrame extends javax.swing.JFrame {
         inputDuration.setText(Integer.toString(duration));
         
         jTable.setModel(scheduleController.updateTable());
-
+        
         setLocationRelativeTo(null);
     }
 
@@ -111,7 +111,7 @@ public class ShowScheduleAddFrame extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-        jLabel6.setText("입력형식 (yyyy-MM-dd HH:mm)");
+        jLabel6.setText("입력형식 (yyyy-MM-ddTHH:mm)");
 
         inputDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

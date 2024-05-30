@@ -22,9 +22,9 @@ public class UserController {
     public static UserController getInstance() {
         return userController;
     }
-
+    
     private UserRepository userRepository;
-
+    
     public UserController() {
         this.userRepository = new UserRepository();
     }
