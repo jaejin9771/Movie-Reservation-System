@@ -4,6 +4,10 @@
  */
 package deu.cse.moviereservationsystem.view.User;
 
+import deu.cse.moviereservationsystem.Controller.UserController;
+import deu.cse.moviereservationsystem.Entity.User.User;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author LG
@@ -13,6 +17,12 @@ public class ModifyUserInfoFrame extends javax.swing.JFrame {
     /**
      * Creates new form ModifyUserInfoFrame
      */
+    UserController user = UserController.getInstance();
+    private String id = user.getId();
+    private String oldPw;
+    private String newPw;
+    private String name;
+    
     public ModifyUserInfoFrame() {
         initComponents();
         setLocationRelativeTo(null);
@@ -30,12 +40,8 @@ public class ModifyUserInfoFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         previousFrameButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        inputID = new javax.swing.JTextField();
         inputPW = new javax.swing.JTextField();
-        inputName = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         modifyInfoButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         inputPW1 = new javax.swing.JTextField();
@@ -53,7 +59,7 @@ public class ModifyUserInfoFrame extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
-        jLabel1.setText("회원 정보 수정");
+        jLabel1.setText("비밀번호 수정");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -62,7 +68,7 @@ public class ModifyUserInfoFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 227, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
                 .addComponent(previousFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -74,20 +80,10 @@ public class ModifyUserInfoFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1)))
         );
 
-        inputID.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-
         inputPW.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
 
-        inputName.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
-
-        jLabel2.setFont(new java.awt.Font("맑은 고딕", 0, 20)); // NOI18N
-        jLabel2.setText("ID :");
-
         jLabel3.setFont(new java.awt.Font("맑은 고딕", 0, 20)); // NOI18N
-        jLabel3.setText("PW :");
-
-        jLabel4.setFont(new java.awt.Font("맑은 고딕", 0, 18)); // NOI18N
-        jLabel4.setText("이름 :");
+        jLabel3.setText("현재 비밀번호:");
 
         modifyInfoButton.setBackground(new java.awt.Color(204, 204, 204));
         modifyInfoButton.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
@@ -99,7 +95,7 @@ public class ModifyUserInfoFrame extends javax.swing.JFrame {
         });
 
         jLabel5.setFont(new java.awt.Font("맑은 고딕", 0, 20)); // NOI18N
-        jLabel5.setText("CheckPW:");
+        jLabel5.setText("새로운 비밀번호:");
 
         inputPW1.setFont(new java.awt.Font("맑은 고딕", 0, 14)); // NOI18N
 
@@ -109,57 +105,35 @@ public class ModifyUserInfoFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(modifyInfoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(inputPW1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(inputPW, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(inputID, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(inputName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(modifyInfoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(inputPW, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(inputPW1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputID, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inputPW, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(inputPW1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(58, 58, 58)
                 .addComponent(modifyInfoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -168,29 +142,35 @@ public class ModifyUserInfoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void modifyInfoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyInfoButtonActionPerformed
-        // TODO add your handling code here:
-        //데이터파일에 수정된 정보가 저장되었다면 (Login singleton객체와 이 화면에서 입력된 ID 값이 같았을 때 수정)
-        UserMainFrame user = new UserMainFrame();
-        user.setVisible(true);
-        dispose();
+        oldPw = inputPW.getText();
+        newPw = inputPW1.getText();
+        
+        if (user.Login(id, oldPw) == null) {
+            JOptionPane.showMessageDialog(null, "비밀번호 정보가 맞지 않습니다.");
+        } else {
+            name = user.checkModifiedPW(id);
+            User newUser = user.modifyPassword(id, newPw, name);
+            User oldUser = user.findById(id);
+            user.updateUser(oldUser, newUser);
+            JOptionPane.showMessageDialog(null, "비밀번호가 변경되었습니다.");
+            UserMainFrame user = new UserMainFrame();
+            user.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_modifyInfoButtonActionPerformed
 
     private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
         // TODO add your handling code here:
-         UserMainFrame user = new UserMainFrame();
+        UserMainFrame user = new UserMainFrame();
         user.setVisible(true);
         dispose();
     }//GEN-LAST:event_previousFrameButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField inputID;
-    private javax.swing.JTextField inputName;
     private javax.swing.JTextField inputPW;
     private javax.swing.JTextField inputPW1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton modifyInfoButton;
