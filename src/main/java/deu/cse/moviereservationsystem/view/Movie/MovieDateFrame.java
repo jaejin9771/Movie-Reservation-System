@@ -84,7 +84,7 @@ public class MovieDateFrame extends javax.swing.JFrame {
 
         textLabel.setBackground(new java.awt.Color(229, 229, 229));
         textLabel.setFont(new java.awt.Font("맑은 고딕", 0, 24)); // NOI18N
-        textLabel.setText("예약할 날짜를 선택해주세요.");
+        textLabel.setText("예매할 날짜를 선택해주세요.");
 
         movieDateTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,8 +125,7 @@ public class MovieDateFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(222, 222, 222)
-                        .addComponent(textLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(textLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1))

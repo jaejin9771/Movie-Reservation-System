@@ -43,7 +43,11 @@ public class ScheduleController {
         }
         return true;
     }
-
+    
+    public void delete(String title, String theater, LocalDateTime dateTime, int duration) {
+        showScheduleRepository.delete(new ShowSchedule(title,theater,dateTime,duration));
+    }
+    
     public DefaultTableModel updateTable() {
         List<String[]> scheduleData = readScheduletoString();
 

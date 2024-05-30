@@ -65,7 +65,7 @@ public class ShowSchedule {
 
         // 형 변환 후, 필드별로 비교
         ShowSchedule ss = (ShowSchedule) obj;
-        return title == ss.title
+        return Objects.equals(title, ss.title)
                 && Objects.equals(theater, ss.theater)
                 && dateTime.isEqual(ss.dateTime)
                 && duration == ss.duration;
