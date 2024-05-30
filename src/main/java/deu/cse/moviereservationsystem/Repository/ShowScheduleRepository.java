@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class ShowScheduleRepository extends CrudRepository<ShowSchedule>{
     
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
     
     public ShowScheduleRepository() {
         super("showschedule.txt");
@@ -29,7 +29,7 @@ public class ShowScheduleRepository extends CrudRepository<ShowSchedule>{
     
     @Override
     protected String toString(ShowSchedule showSchedule){
-        return showSchedule.getTitle() + "," + showSchedule.getTheater() + "," + showSchedule.getShowTime() + "," + showSchedule.getDuration();
+        return showSchedule.getTitle() + "," + showSchedule.getTheater() + "," +  showSchedule.getShowTime().toString() + "," + showSchedule.getDuration();
     }
     
 }
