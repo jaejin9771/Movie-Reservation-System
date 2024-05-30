@@ -220,7 +220,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="&#xb9d1;&#xc740; &#xace0;&#xb515;" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#xc785;&#xb825;&#xd615;&#xc2dd; (yyyy-MM-ddTHH:mm)"/>
+        <Property name="text" type="java.lang.String" value="&#xc785;&#xb825;&#xd615;&#xc2dd; (2025-05-25T13:30)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="inputDate">
