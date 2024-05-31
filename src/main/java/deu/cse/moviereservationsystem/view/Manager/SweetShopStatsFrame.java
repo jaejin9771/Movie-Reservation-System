@@ -23,6 +23,7 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
      * Creates new form SweetShopStatsFrame
      */
     SweeetShopStatsController stats = new SweeetShopStatsController();
+    StatsType stat;
     DefaultTableModel model;
     int c_year;
     int c_month;
@@ -53,8 +54,8 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 printSelectedDate(calendar);
-                YearStats year = new YearStats();
-                int yearP_total = year.calculateStats(String.valueOf(c_year));
+                stat = new YearStats();
+                int yearP_total = stat.calculateStats(String.valueOf(c_year));
                 yearStats.setText(String.valueOf(yearP_total));
             }
         });
@@ -64,8 +65,8 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 printSelectedDate(calendar);
-                MonthStats month = new MonthStats();
-                int monthP_total = month.calculateStats(String.format("%02d", c_month));
+                stat = new MonthStats();
+                int monthP_total = stat.calculateStats(String.format("%02d", c_month));
                 monthStats.setText(String.valueOf(monthP_total));
             }
         });
@@ -75,8 +76,8 @@ public class SweetShopStatsFrame extends javax.swing.JFrame {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 printSelectedDate(calendar);
-                DayStats day = new DayStats();
-                int dayP_total = day.calculateStats(String.valueOf(c_year + "-" + String.format("%02d", c_month) + "-" + String.format("%02d", c_day)));
+                stat = new DayStats();
+                int dayP_total = stat.calculateStats(String.valueOf(c_year + "-" + String.format("%02d", c_month) + "-" + String.format("%02d", c_day)));
                 dayStats.setText(String.valueOf(dayP_total));
             }
         });
