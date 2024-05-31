@@ -25,6 +25,9 @@ public class SweetShopFrame extends javax.swing.JFrame implements Observer,Displ
     InputImage input = new InputImage();
     int countOrder;
     private OrderList order;
+    private String menu;
+    private String size;
+    private int cost;
     
     private SweetShopFrame() {
         initComponents();
@@ -54,6 +57,14 @@ public class SweetShopFrame extends javax.swing.JFrame implements Observer,Displ
         display();
     }
 
+    private void requestDeleteObserver() {
+        this.menu = "";
+        this.size = "";
+        this.cost = 0;
+        OrderList order = OrderList.getInstance();
+        order.receiveOrderList(menu, size, cost);
+    }
+    
     @Override
     public void display() {
         setCountOrder.setText(Integer.toString(countOrder));
@@ -209,9 +220,11 @@ public class SweetShopFrame extends javax.swing.JFrame implements Observer,Displ
     }//GEN-LAST:event_PopcornFrameButtonActionPerformed
 
     private void previousFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_previousFrameButtonActionPerformed
+        requestDeleteObserver();
         SweetShopFacade facade = new SweetShopFacade();
         facade.offObserver();
-        
+        ShoppingCartFrame frame =  ShoppingCartFrame.getInstance();
+        frame.getModel().setRowCount(0);
         UserMainFrame user = new UserMainFrame();
         user.setVisible(true);
         dispose();

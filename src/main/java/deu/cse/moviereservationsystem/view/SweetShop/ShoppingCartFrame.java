@@ -30,6 +30,10 @@ public class ShoppingCartFrame extends javax.swing.JFrame implements Observer, D
     private String size;
     private int cost;
 
+    public DefaultTableModel getModel() {
+        return model;
+    }
+
     DefaultTableModel model; //JTable 객체
     private static ShoppingCartFrame instance; // 인스턴스 변수 선언
     private OrderList order; //subject 객체
