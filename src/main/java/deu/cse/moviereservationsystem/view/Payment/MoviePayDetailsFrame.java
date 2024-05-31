@@ -4,18 +4,25 @@
  */
 package deu.cse.moviereservationsystem.view.Payment;
 
+import deu.cse.moviereservationsystem.Controller.TicketController;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  *
  * @author LG
  */
 public class MoviePayDetailsFrame extends javax.swing.JFrame {
-
+    TicketController ticketController = TicketController.getInstance();
     /**
      * Creates new form MoviePayDetailsFrame
      */
     public MoviePayDetailsFrame() {
         initComponents();
+        jTable.setModel(ticketController.updateTable());
         setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -31,7 +38,7 @@ public class MoviePayDetailsFrame extends javax.swing.JFrame {
         previousFrameButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         cancelPaymentButton = new javax.swing.JButton();
         checkButton = new javax.swing.JButton();
 
@@ -69,21 +76,26 @@ public class MoviePayDetailsFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1)))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTable);
 
         cancelPaymentButton.setBackground(new java.awt.Color(204, 204, 204));
         cancelPaymentButton.setText("결제 취소");
+        cancelPaymentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelPaymentButtonActionPerformed(evt);
+            }
+        });
 
         checkButton.setBackground(new java.awt.Color(204, 204, 204));
         checkButton.setText("확인");
@@ -127,6 +139,30 @@ public class MoviePayDetailsFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_previousFrameButtonActionPerformed
 
+    private void cancelPaymentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelPaymentButtonActionPerformed
+        int row = jTable.getSelectedRow();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String id =(String) jTable.getValueAt(row,0);
+        String title = (String) jTable.getValueAt(row,1);
+        String theater = (String)jTable.getValueAt(row,2);
+        String str = (String)jTable.getValueAt(row,3);
+        int duration = Integer.parseInt(String.valueOf(jTable.getValueAt(row,4)));
+        String seat = (String)jTable.getValueAt(row,5);
+         try {
+            LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
+            
+            System.out.println("Result: " + dateTime.toString());
+            ticketController.cancelTicket(id,title, theater, dateTime , duration,seat);
+            
+        } catch (DateTimeParseException ex) {
+             
+             ex.printStackTrace();
+        }
+        
+        jTable.setModel(ticketController.updateTable());
+        
+    }//GEN-LAST:event_cancelPaymentButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelPaymentButton;
@@ -134,7 +170,7 @@ public class MoviePayDetailsFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     private javax.swing.JButton previousFrameButton;
     // End of variables declaration//GEN-END:variables
 }

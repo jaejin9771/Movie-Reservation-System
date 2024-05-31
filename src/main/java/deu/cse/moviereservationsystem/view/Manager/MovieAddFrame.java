@@ -228,7 +228,7 @@ public class MovieAddFrame extends javax.swing.JFrame {
 
         jTable.setModel(movieController.updateTable());
     }//GEN-LAST:event_deleteButtonActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */

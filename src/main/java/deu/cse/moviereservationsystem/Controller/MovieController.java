@@ -92,7 +92,7 @@ public class MovieController {
 
         return tableModel;
     }
-
+    
     public void delete(String title, String genre, String director, String duration) {
         movieRepository.delete(new Movie(title, genre, director, Integer.parseInt(duration)));
     }
