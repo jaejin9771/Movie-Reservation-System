@@ -25,17 +25,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="111" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="moieAddFrameButton" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
-                  <Component id="showScheduleButton" alignment="1" min="-2" pref="128" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="sweetShopStatsFrameButton" pref="130" max="32767" attributes="0"/>
-                  <Component id="movieStatsFrameButton" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
+              <EmptySpace pref="45" max="32767" attributes="0"/>
+              <Component id="moieAddFrameButton" min="-2" pref="128" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Component id="showScheduleButton" min="-2" pref="128" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <Component id="sweetShopStatsFrameButton" min="-2" pref="130" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,17 +39,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="movieStatsFrameButton" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
-                  <Component id="moieAddFrameButton" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="sweetShopStatsFrameButton" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
                   <Component id="showScheduleButton" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
+                  <Component id="moieAddFrameButton" alignment="3" min="-2" pref="66" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="58" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="118" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -120,17 +112,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moieAddFrameButtonActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="movieStatsFrameButton">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="cc" green="cc" red="cc" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="&#xc601;&#xd654; &#xc608;&#xb9e4; &#xd1b5;&#xacc4;"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="movieStatsFrameButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="sweetShopStatsFrameButton">
