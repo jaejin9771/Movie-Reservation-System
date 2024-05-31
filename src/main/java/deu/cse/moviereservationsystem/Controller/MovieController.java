@@ -40,7 +40,12 @@ public class MovieController {
             }
         }
 
-        Movie movie = movieRepository.create(new Movie(title, genre, director, duration));
+        Movie movie = movieRepository.create(new MovieBuilder()
+                                                                            .title(title)
+                                                                            .genre(genre)
+                                                                            .director(director)
+                                                                            .duration(duration)
+        .build());
 
         //영화 등록 실패 시 null 리턴
         if (Objects.isNull(movie)) {
