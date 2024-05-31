@@ -18,7 +18,9 @@ import javax.swing.UIManager;
  * @author LG
  */
 public class LoginFrame extends javax.swing.JFrame {
+
     UserController userController = UserController.getInstance();
+
     /**
      * Creates new form LoginFrame
      */
@@ -164,19 +166,19 @@ public class LoginFrame extends javax.swing.JFrame {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         String id = inputId.getText();
         String pw = inputPw.getText();
-        
-        if("".equals(id) || "".equals(pw)) {
+
+        if ("".equals(id) || "".equals(pw)) {
             JOptionPane.showMessageDialog(null, "빈 칸 없이 입력해주세요.");
-            return; 
+            return;
         }
-        
+
         User user = userController.Login(id, pw);
-        
-        if(Objects.isNull(user)){
+
+        if (Objects.isNull(user)) {
             JOptionPane.showMessageDialog(null, "로그인 정보가 맞지 않습니다.");
             return;
         }
-        
+
         //만약 입력된 회원정보가 맞다면
         UserMainFrame userFrame = new UserMainFrame();
         userFrame.setVisible(true);
@@ -186,9 +188,17 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void managerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerButtonActionPerformed
-        ManagerMainFrame managerFrame = new ManagerMainFrame();
-        managerFrame.setVisible(true);
-        dispose();
+        String managerPw = JOptionPane.showInputDialog("비밀번호를 입력하세요");
+        if (managerPw != null) {
+            if ("1234".equals(managerPw)) {
+                ManagerMainFrame managerFrame = new ManagerMainFrame();
+                managerFrame.setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "비밀번호를 잘못 입력했습니다.");
+            }
+        }
+
     }//GEN-LAST:event_managerButtonActionPerformed
 
 

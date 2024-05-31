@@ -33,7 +33,6 @@ public class ManagerMainFrame extends javax.swing.JFrame {
         previousFrameButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         moieAddFrameButton = new javax.swing.JButton();
-        movieStatsFrameButton = new javax.swing.JButton();
         sweetShopStatsFrameButton = new javax.swing.JButton();
         showScheduleButton = new javax.swing.JButton();
 
@@ -79,14 +78,6 @@ public class ManagerMainFrame extends javax.swing.JFrame {
             }
         });
 
-        movieStatsFrameButton.setBackground(new java.awt.Color(204, 204, 204));
-        movieStatsFrameButton.setText("영화 예매 통계");
-        movieStatsFrameButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                movieStatsFrameButtonActionPerformed(evt);
-            }
-        });
-
         sweetShopStatsFrameButton.setBackground(new java.awt.Color(204, 204, 204));
         sweetShopStatsFrameButton.setText("스위트샵 통계");
         sweetShopStatsFrameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -109,29 +100,24 @@ public class ManagerMainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(111, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(moieAddFrameButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(showScheduleButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(sweetShopStatsFrameButton, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(movieStatsFrameButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(111, 111, 111))
+                .addContainerGap(45, Short.MAX_VALUE)
+                .addComponent(moieAddFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(showScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(sweetShopStatsFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(movieStatsFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(moieAddFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(99, 99, 99)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sweetShopStatsFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(showScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 58, Short.MAX_VALUE))
+                    .addComponent(showScheduleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(moieAddFrameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 118, Short.MAX_VALUE))
         );
 
         pack();
@@ -151,11 +137,6 @@ public class ManagerMainFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_moieAddFrameButtonActionPerformed
 
-    private void movieStatsFrameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_movieStatsFrameButtonActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_movieStatsFrameButtonActionPerformed
-
     private void showScheduleButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showScheduleButtonActionPerformed
         MovieFrame frame = new MovieFrame();
         frame.setVisible(true);
@@ -173,7 +154,6 @@ public class ManagerMainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton moieAddFrameButton;
-    private javax.swing.JButton movieStatsFrameButton;
     private javax.swing.JButton previousFrameButton;
     private javax.swing.JButton showScheduleButton;
     private javax.swing.JButton sweetShopStatsFrameButton;
