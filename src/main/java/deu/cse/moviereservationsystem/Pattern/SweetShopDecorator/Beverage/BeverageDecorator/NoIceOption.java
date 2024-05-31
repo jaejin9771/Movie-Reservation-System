@@ -5,19 +5,21 @@
 package deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Beverage.BeverageDecorator;
 
 import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Beverage.Beverage;
+import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.B_CondimentDecorator;
 import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Items;
 
 /**
  *
  * @author LG
  */
-public class NoIceOption extends Beverage{
+public class NoIceOption extends B_CondimentDecorator{
     String description = "얼음 없음";
     Items beverage;
     public NoIceOption(Items beverage){
         this.beverage = beverage;
         
     }
+    @Override
     public String getDescription() {
         return beverage.getDescription()+" + "+description;
     }

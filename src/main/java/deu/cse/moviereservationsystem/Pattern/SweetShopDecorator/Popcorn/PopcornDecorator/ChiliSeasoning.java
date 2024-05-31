@@ -5,13 +5,13 @@
 package deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Popcorn.PopcornDecorator;
 
 import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Items;
-import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Popcorn.Popcorn;
+import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.P_CondimentDecorator;
 
 /**
  *
  * @author LG
  */
-public class ChiliSeasoning extends Popcorn{
+public class ChiliSeasoning extends P_CondimentDecorator{
     String description = "칠리 시즈닝 추가";
     Items popcorn;
     public ChiliSeasoning(Items popcorn){

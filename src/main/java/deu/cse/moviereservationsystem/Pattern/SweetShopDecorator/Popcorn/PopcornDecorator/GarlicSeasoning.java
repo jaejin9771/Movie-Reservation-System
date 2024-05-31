@@ -5,13 +5,13 @@
 package deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Popcorn.PopcornDecorator;
 
 import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Items;
-import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.Popcorn.Popcorn;
+import deu.cse.moviereservationsystem.Pattern.SweetShopDecorator.P_CondimentDecorator;
 
 /**
  *
  * @author LG
  */
-public class GarlicSeasoning extends Popcorn {
+public class GarlicSeasoning extends P_CondimentDecorator {
     String description = "갈릭 시즈닝 추가";
     Items popcorn;
     public GarlicSeasoning(Items popcorn){
