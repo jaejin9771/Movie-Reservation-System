@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,11 +18,11 @@ import java.util.Objects;
  */
 public class TicketController {
     private static TicketController ticketController = new TicketController();
-    
+    UserController userController = UserController.getInstance();
     public static TicketController getInstance() {
         return ticketController;
     }
-    
+    private final String[] columnNames = {"아이디", "제목", "상영관", "날짜","상영시간(분)","좌석번호"};
     private TicketRepository ticketRepository;
     
     public TicketController() {
@@ -48,5 +49,33 @@ public class TicketController {
             }
         }
         return true;
+    }
+    
+    public List<String[]> readTickettoString() {
+        return ticketRepository.readAlltoString();
+    }
+    
+     public DefaultTableModel updateTable() {
+        List<String[]> ticketData = readTickettoString();
+
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // All cells are not editable
+            }
+        };
+        //jTable = new JTable(tableModel);
+
+        for (String[] ticket : ticketData) {
+            if (userController.getId().equals(ticket[0])) {
+                tableModel.addRow(ticket);
+            }
+        }
+
+        return tableModel;
+    }
+    
+    public void cancelTicket(String id,String title,String theater,LocalDateTime dateTime ,int duration,String seat){
+        ticketRepository.delete(new Ticket(id,title,theater,dateTime,duration,seat));
     }
 }

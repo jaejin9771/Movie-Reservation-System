@@ -25,7 +25,7 @@ public class UserController {
     
     private UserRepository userRepository;
     
-    public UserController() {
+    private UserController() {
         this.userRepository = new UserRepository();
     }
 
