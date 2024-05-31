@@ -6,6 +6,7 @@ package deu.cse.moviereservationsystem.Controller;
 
 import deu.cse.moviereservationsystem.Entity.Movie.Movie;
 import deu.cse.moviereservationsystem.Entity.Movie.Movie.MovieBuilder;
+import deu.cse.moviereservationsystem.Pattern.MovieFactory.*;
 import deu.cse.moviereservationsystem.Repository.MovieRepository;
 import deu.cse.moviereservationsystem.Repository.ShowScheduleRepository;
 import java.util.List;
@@ -40,14 +41,28 @@ public class MovieController {
                 return null;
             }
         }
+        
+        MovieFactory movieFactory;
+        switch (genre.toLowerCase()) {
+            case "action":
+                movieFactory = new ActionMovieFactory();
+                break;
+            case "comedy":
+                movieFactory = new ComedyMovieFactory();
+                break;
+            case "thriller":
+                movieFactory = new ThrillerMovieFactory();
+                break;
+            case "romance":
+                movieFactory = new RomanceMovieFactory();
+                break;
+            default:
+                return null;
+        }
 
-        Movie movie = movieRepository.create(new MovieBuilder()
-                .title(title)
-                .genre(genre)
-                .director(director)
-                .duration(duration)
-                .build());
-
+        
+        Movie movie = movieRepository.create(movieFactory.createMovie(title, director, duration));
+        
         //영화 등록 실패 시 null 리턴
         if (Objects.isNull(movie)) {
             return null;

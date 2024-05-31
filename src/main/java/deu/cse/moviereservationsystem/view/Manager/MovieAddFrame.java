@@ -14,14 +14,16 @@ import javax.swing.JOptionPane;
  * @author jaejin
  */
 public class MovieAddFrame extends javax.swing.JFrame {
+
     MovieController movieController = MovieController.getInstance();
+
     /**
      * Creates new form MovieAddFrame
      */
     public MovieAddFrame() {
         initComponents();
         setLocationRelativeTo(null);
-        jTable.setModel(movieController.updateTable());        
+        jTable.setModel(movieController.updateTable());
     }
 
     /**
@@ -37,7 +39,6 @@ public class MovieAddFrame extends javax.swing.JFrame {
         inputTitle = new javax.swing.JTextField();
         inputDirector = new javax.swing.JTextField();
         inputDuration = new javax.swing.JTextField();
-        inputGenre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -47,6 +48,7 @@ public class MovieAddFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
         deleteButton = new javax.swing.JButton();
+        inputGenre = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +109,9 @@ public class MovieAddFrame extends javax.swing.JFrame {
             }
         });
 
+        inputGenre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Action", "Comedy", "Thriller", "Romance" }));
+        inputGenre.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,18 +135,17 @@ public class MovieAddFrame extends javax.swing.JFrame {
                                 .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(inputDirector, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(inputTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(inputGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(inputDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(inputGenre, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(inputDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(addButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(41, 41, 41)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
         );
@@ -165,8 +169,8 @@ public class MovieAddFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(inputGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(inputGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(inputDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,21 +191,22 @@ public class MovieAddFrame extends javax.swing.JFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
         String title = inputTitle.getText();
-        String genre = inputGenre.getText();
+        String genre = inputGenre.getSelectedItem().toString();
         String director = inputDirector.getText();
         Integer duration = Integer.parseInt(inputDuration.getText()); // String 값을 Integer로 변환
-        
-        if("".equals(title) || "".equals(genre) || "".equals(director) || "".equals(duration)) {
+
+        if ("".equals(title) || "".equals(genre) || "".equals(director) || "".equals(duration)) {
             JOptionPane.showMessageDialog(null, "빈 칸 없이 입력해주세요.");
             return;
         }
-        
-        Movie movie = movieController.addMovie(title,genre,director,duration);
-        
-        if(Objects.isNull(movie)) JOptionPane.showMessageDialog(null, "영화 등록에 실패 하였습니다.");
-        else{
+
+        Movie movie = movieController.addMovie(title, genre, director, duration);
+
+        if (Objects.isNull(movie))
+            JOptionPane.showMessageDialog(null, "영화 등록에 실패 하였습니다.");
+        else {
             JOptionPane.showMessageDialog(null, "영화 등록이 완료 되었습니다.");
-            initComponents();
+            jTable.setModel(movieController.updateTable());
         }
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -213,27 +218,27 @@ public class MovieAddFrame extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int row = jTable.getSelectedRow();
-        
-        String title = (String)jTable.getValueAt(row,0);
-        String genre = (String)jTable.getValueAt(row,1);
-        String director = (String)jTable.getValueAt(row,2);
-        String duration = (String)jTable.getValueAt(row, 3);
-        
-        movieController.delete(title,genre,director,duration);
-        
+
+        String title = (String) jTable.getValueAt(row, 0);
+        String genre = (String) jTable.getValueAt(row, 1);
+        String director = (String) jTable.getValueAt(row, 2);
+        String duration = (String) jTable.getValueAt(row, 3);
+
+        movieController.delete(title, genre, director, duration);
+
         jTable.setModel(movieController.updateTable());
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JTextField inputDirector;
     private javax.swing.JTextField inputDuration;
-    private javax.swing.JTextField inputGenre;
+    private javax.swing.JComboBox<String> inputGenre;
     private javax.swing.JTextField inputTitle;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
