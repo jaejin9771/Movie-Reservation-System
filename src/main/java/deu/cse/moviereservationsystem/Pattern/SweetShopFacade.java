@@ -33,4 +33,5 @@ public class SweetShopFacade {
         orderList.removeObserver(popcorn); //옵저버 삭제(구독 알림 x)
         orderList.removeObserver(frame);
     }
+    
 }
