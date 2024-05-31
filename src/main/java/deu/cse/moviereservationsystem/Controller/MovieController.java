@@ -5,6 +5,7 @@
 package deu.cse.moviereservationsystem.Controller;
 
 import deu.cse.moviereservationsystem.Entity.Movie.Movie;
+import deu.cse.moviereservationsystem.Entity.Movie.Movie.MovieBuilder;
 import deu.cse.moviereservationsystem.Repository.MovieRepository;
 import deu.cse.moviereservationsystem.Repository.ShowScheduleRepository;
 import java.util.List;
@@ -41,11 +42,11 @@ public class MovieController {
         }
 
         Movie movie = movieRepository.create(new MovieBuilder()
-                                                                            .title(title)
-                                                                            .genre(genre)
-                                                                            .director(director)
-                                                                            .duration(duration)
-        .build());
+                .title(title)
+                .genre(genre)
+                .director(director)
+                .duration(duration)
+                .build());
 
         //영화 등록 실패 시 null 리턴
         if (Objects.isNull(movie)) {
@@ -76,8 +77,8 @@ public class MovieController {
 
         return tableModel;
     }
-    
+
     public void delete(String title, String genre, String director, String duration) {
-        movieRepository.delete(new Movie(title,genre,director,Integer.parseInt(duration)));
+        movieRepository.delete(new Movie(title, genre, director, Integer.parseInt(duration)));
     }
 }
